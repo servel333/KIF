@@ -83,7 +83,7 @@
         BOOL labelsMatch = [element.accessibilityLabel isEqual:label];
         BOOL traitsMatch = ((element.accessibilityTraits) & traits) == traits;
         BOOL valuesMatch = !value || [value isEqual:element.accessibilityValue];
-        
+
         return (BOOL)(labelsMatch && traitsMatch && valuesMatch);
     }];
 }
@@ -106,7 +106,7 @@
     UIAccessibilityElement *matchingButOccludedElement = nil;
     
     BOOL elementMatches = matchBlock((UIAccessibilityElement *)self);
-    
+
     if (elementMatches) {
         if (self.tappable) {
             return (UIAccessibilityElement *)self;
@@ -140,13 +140,13 @@
     while (elementStack.count) {
         UIAccessibilityElement *element = [elementStack lastObject];
         [elementStack removeLastObject];
-        
+
         BOOL elementMatches = matchBlock(element);
-        
+
         if (elementMatches) {
             UIView *viewForElement = [UIAccessibilityElement viewContainingAccessibilityElement:element];
             CGRect accessibilityFrame = [viewForElement.window convertRect:element.accessibilityFrame toView:viewForElement];
-            
+
             if ([viewForElement isTappableInRect:accessibilityFrame]) {
                 return element;
             } else {

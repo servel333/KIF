@@ -65,6 +65,32 @@ MAKE_CATEGORIES_LOADABLE(UIApplication_KIFAdditions)
     return nil;
 }
 
+- (UIAccessibilityElement *)accessibilityElementMatchingRegularExpressionWithPattern:(NSString *)pattern;
+{
+    
+    __block NSError *error = NULL;
+    __block NSRegularExpression *regex = [[NSRegularExpression  regularExpressionWithPattern:pattern  options:NSRegularExpressionCaseInsensitive  error:&error] retain];
+    
+    UIAccessibilityElement * matchingElement = 
+            [self  accessibilityElementMatchingBlock:^BOOL(UIAccessibilityElement *element) 
+                    {
+                        NSUInteger numberOfMatches = 0;
+        
+                        if (element.accessibilityLabel)
+                        {
+                            
+                            //NSRegularExpression *regex = [NSRegularExpression  regularExpressionWithPattern:pattern  options:NSRegularExpressionCaseInsensitive  error:&error];
+                            numberOfMatches = [regex  numberOfMatchesInString:element.accessibilityLabel  options:0  range:NSMakeRange(0, [element.accessibilityLabel length])];
+                            
+                        }
+                        
+                        return ( 0 < numberOfMatches );
+                    }];
+    
+    [regex release];
+    return matchingElement;
+}
+
 - (UIWindow *)keyboardWindow;
 {
     for (UIWindow *window in [self windows]) {

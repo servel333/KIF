@@ -312,13 +312,6 @@ typedef KIFTestStepResult (^KIFTestStepExecutionBlock)(KIFTestStep *step, NSErro
 + (id)stepToWaitForNotificationName:(NSString*)name object:(id)object;
 
 /*!
- @method  stepToWaitSeconds:
- @abstract  Waits the number of seconds and then continues executing steps.
- @param  seconds  The number of seconds to wait.
- */
-+ (id)stepToWaitSeconds:(NSTimeInterval)seconds;
-
-/*!
  @abstract  A step that taps a particular view in the view hierarchy.
  @param  labelBlock  A block that will return the accessibility label of the element to tap.
  @result  A configured test step.

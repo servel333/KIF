@@ -15,9 +15,26 @@
 - (UIAccessibilityElement *)accessibilityElementWithLabel:(NSString *)label;
 - (UIAccessibilityElement *)accessibilityElementWithLabel:(NSString *)label traits:(UIAccessibilityTraits)traits;
 - (UIAccessibilityElement *)accessibilityElementWithLabel:(NSString *)label accessibilityValue:(NSString *)value traits:(UIAccessibilityTraits)traits;
-- (UIView *)viewWithClassName:(NSString *)className;
 - (UIAccessibilityElement *)accessibilityElementMatchingBlock:(BOOL(^)(UIAccessibilityElement *))matchBlock;
 - (UIAccessibilityElement *)accessibilityElementMatchingRegularExpressionWithPattern:(NSString *)pattern;
+
+/*!
+ @method  controllerWithClassName:forViewWithClassName:
+ @abstract  Finds the named controller of the named view.
+ @param  controllerClassName  The named controller to search for.
+ @param  viewClassName  The named view to search for.
+ @result  The named controller or nil.
+ @discussion  Searches through the view hierarchy for the named view, then searches the views responders for the named controller.
+ */
+- (UIViewController *)controllerWithClassName:(NSString *)controllerClassName  forViewWithClassName:(NSString *)viewClassName;
+
+/*!
+ @method  viewWithClassName:
+ @abstract  Finds the named descendent view.
+ @param  className  The named class to search for.
+ @result  The named class or nil.
+ */
+- (UIView *)viewWithClassName:(NSString *)className;
 
 - (UIWindow *)keyboardWindow;
 - (UIWindow *)pickerViewWindow;

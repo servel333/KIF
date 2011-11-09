@@ -88,6 +88,33 @@
     }];
 }
 
++ (UIViewController *)controllerWithClassName:(NSString *)controllerClassName  forResponder:(UIResponder *)responder;
+{
+    id nextResponder = [responder nextResponder];
+    
+    if ( ([nextResponder isKindOfClass:[UIViewController class]]) && (NSOrderedSame == [controllerClassName compare:NSStringFromClass([nextResponder class])]) ) {
+        
+        return nextResponder;
+        
+    } else if ([nextResponder isKindOfClass:[UIResponder class]]){
+        
+        return [UIView controllerWithClassName:controllerClassName  forResponder:nextResponder];
+        
+    }
+    
+    return nil;
+}
+
+- (UIViewController *)controllerWithClassName:(NSString *)controllerClassName  forViewWithClassName:(NSString *)viewClassName;
+{
+    UIView *view = (UIView *)[self accessibilityElementMatchingBlock:^(UIAccessibilityElement *element) {
+        
+        return (BOOL) ( NSOrderedSame == [viewClassName compare:NSStringFromClass([element class])] );
+    }];
+    
+    return [UIView controllerWithClassName:controllerClassName  forResponder:view];
+}
+
 - (UIView *)viewWithClassName:(NSString *)className;
 {
     return (UIView *)[self accessibilityElementMatchingBlock:^(UIAccessibilityElement *element) {

@@ -41,18 +41,6 @@ MAKE_CATEGORIES_LOADABLE(UIApplication_KIFAdditions)
     return nil;
 }
 
-- (UIView *)viewWithClassName:(NSString *)className;
-{
-    for (UIWindow *window in [self windows]) {
-        UIView * view = [window viewWithClassName:className];
-        if (view) {
-            return view;
-        }
-    }
-    
-    return nil;
-}
-
 - (UIAccessibilityElement *)accessibilityElementMatchingBlock:(BOOL(^)(UIAccessibilityElement *))matchBlock;
 {
     for (UIWindow *window in [self windows]) {
@@ -89,6 +77,30 @@ MAKE_CATEGORIES_LOADABLE(UIApplication_KIFAdditions)
     
     [regex release];
     return matchingElement;
+}
+
+- (UIViewController *)controllerWithClassName:(NSString *)controllerClassName  forViewWithClassName:(NSString *)viewClassName;
+{
+    for (UIWindow *window in [self windows]) {
+        UIViewController *controller = [window controllerWithClassName:controllerClassName  forViewWithClassName:viewClassName];
+        if (controller) {
+            return controller;
+        }
+    }
+    
+    return nil;
+}
+
+- (UIView *)viewWithClassName:(NSString *)className;
+{
+    for (UIWindow *window in [self windows]) {
+        UIView * view = [window viewWithClassName:className];
+        if (view) {
+            return view;
+        }
+    }
+    
+    return nil;
 }
 
 - (UIWindow *)keyboardWindow;

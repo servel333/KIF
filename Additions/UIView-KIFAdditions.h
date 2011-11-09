@@ -18,6 +18,33 @@
 - (UIAccessibilityElement *)accessibilityElementWithLabel:(NSString *)label;
 - (UIAccessibilityElement *)accessibilityElementWithLabel:(NSString *)label traits:(UIAccessibilityTraits)traits;
 - (UIAccessibilityElement *)accessibilityElementWithLabel:(NSString *)label accessibilityValue:(NSString *)value traits:(UIAccessibilityTraits)traits;
+
+/*!
+ @method  controllerWithClassName:forResponder:
+ @abstract  Finds the named controller for the responder.
+ @param  controllerClassName  The named controller to search for.
+ @param  responder  The responder to attempt to match and then get the next responder from.
+ @result  The found controller or nil.
+ @discussion  Attempts to identify the specified responder as the named controler.  If there is no match, continues searching the next responder using recursion.
+ */
++ (UIViewController *)controllerWithClassName:(NSString *)controllerClassName  forResponder:(UIResponder *)responder;
+
+/*!
+ @method  controllerWithClassName:forViewWithClassName:
+ @abstract  Finds the named controller of the named view.
+ @param  controllerClassName  The named controller to search for.
+ @param  viewClassName  The named view to search for.
+ @result  The named controller or nil.
+ @discussion  Searches through the view hierarchy for the named view, then searches the views responders for the named controller.
+ */
+- (UIViewController *)controllerWithClassName:(NSString *)controllerClassName  forViewWithClassName:(NSString *)viewClassName;
+
+/*!
+ @method  viewWithClassName:
+ @abstract  Finds the named descendent view.
+ @param  className  The named class to search for.
+ @result  The named class or nil.
+ */
 - (UIView *)viewWithClassName:(NSString *)className;
 
 /*!

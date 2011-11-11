@@ -19,6 +19,14 @@
 - (UIAccessibilityElement *)accessibilityElementMatchingRegularExpressionWithPattern:(NSString *)pattern;
 
 /*!
+ @method  tapAtScreenPoint:
+ @abstract  Finds a tappable view at the point and taps it.
+ @param  point  The point to tap, in screen cordornates.
+ @result  true (YES) if successfully tapped a view at the point; otherwise false (NO).
+ */
+- (BOOL)tapAtScreenPoint:(CGPoint)point;
+
+/*!
  @method  controllerWithClassName:forViewWithClassName:
  @abstract  Finds the named controller of the named view.
  @param  controllerClassName  The named controller to search for.

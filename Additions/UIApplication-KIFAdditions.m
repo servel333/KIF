@@ -79,6 +79,35 @@ MAKE_CATEGORIES_LOADABLE(UIApplication_KIFAdditions)
     return matchingElement;
 }
 
+- (BOOL)tapAtScreenPoint:(CGPoint)point
+{
+    UIView *view = nil;
+    
+    // Try all the windows until we get one back that actually has something in it at the given point
+    for (UIWindow *window in [[self windows] reverseObjectEnumerator]) {
+        
+        CGPoint windowPoint = [window convertPoint:point fromView:nil];
+        view = [window hitTest:windowPoint withEvent:nil];
+        
+        // If we hit the window itself, then skip it.
+        if (view == window || view == nil) {
+            continue;
+        }
+    }
+    
+    if (!view)
+    {
+        NSLog(@"No view was found at the point %@", NSStringFromCGPoint(point));
+        return NO;
+    }
+    
+    // This is mostly redundant of the test in _accessibilityElementWithLabel:
+    CGPoint viewPoint = [view convertPoint:point fromView:nil];
+    [view tapAtPoint:viewPoint];
+    
+    return YES;
+}
+
 - (UIViewController *)controllerWithClassName:(NSString *)controllerClassName  forViewWithClassName:(NSString *)viewClassName;
 {
     for (UIWindow *window in [self windows]) {

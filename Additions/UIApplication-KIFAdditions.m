@@ -79,6 +79,19 @@ MAKE_CATEGORIES_LOADABLE(UIApplication_KIFAdditions)
     return matchingElement;
 }
 
+- (BOOL)isAccessibilityInspectorEnabled;
+{
+    UIWindow *keyWindow = [self keyWindow];
+    NSString *originalAccessibilityLabel = [keyWindow accessibilityLabel];
+    
+    [keyWindow setAccessibilityLabel:@"KIF Test Label"];
+    BOOL isInspectorEnabled = [[keyWindow accessibilityLabel] isEqualToString:@"KIF Test Label"];
+    
+    [keyWindow setAccessibilityLabel:originalAccessibilityLabel];
+    
+    return isInspectorEnabled;
+}
+
 - (BOOL)tapAtScreenPoint:(CGPoint)point
 {
     UIView *view = nil;

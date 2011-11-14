@@ -19,6 +19,13 @@
 - (UIAccessibilityElement *)accessibilityElementMatchingRegularExpressionWithPattern:(NSString *)pattern;
 
 /*!
+ @method  isAccessibilityInspectorEnabled
+ @abstract  Gets a value indicating if the accessibility inspector is enabled.
+ @discussion  This method for testing if the inspector is enabled was taken from the Frank framework.  https://github.com/moredip/Frank
+ */
+- (BOOL)isAccessibilityInspectorEnabled;
+
+/*!
  @method  tapAtScreenPoint:
  @abstract  Finds a tappable view at the point and taps it.
  @param  point  The point to tap, in screen cordornates.

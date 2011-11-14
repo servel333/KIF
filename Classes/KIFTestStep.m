@@ -798,7 +798,7 @@ static NSTimeInterval KIFTestStepDefaultTimeout = 10.0;
 #pragma mark Public Methods
 
 - (KIFTestStepResult)executeAndReturnError:(NSError **)error;
-{    
+{
     KIFTestStepResult result = KIFTestStepResultFailure;
     
     if (self.executionBlock) {

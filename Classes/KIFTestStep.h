@@ -9,104 +9,10 @@
 
 #import <UIKit/UIKit.h>
 
-
-/*!
- @define KIFTestCondition
- @abstract Tests a condition and returns a failure result if the condition isn't true.
- @discussion This is a useful macro for quickly evaluating conditions in a test step. If the condition is false then the current test step will be aborted with a failure result.
- @param condition The condition to test.
- @param error The NSError object to put the error string into. May be nil, but should usually be the error parameter from the test step execution block.
- @param ... A string describing what the failure was that occurred. This may be a format string with additional arguments.
- */
-#define KIFTestCondition(condition, error, ...) ({ \
-if (!(condition)) { \
-    if (error) { \
-        *error = [[[NSError alloc] initWithDomain:@"KIFTest" code:KIFTestStepResultFailure userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:__VA_ARGS__], NSLocalizedDescriptionKey, nil]] autorelease]; \
-    } \
-    [KIFTestStep stepFailed]; \
-    return KIFTestStepResultFailure; \
-} \
-})
-
-/*!
- @define KIFTestWaitCondition
- @abstract Tests a condition and returns a wait result if the condition isn't true.
- @discussion This is a useful macro for quickly evaluating conditions in a test step. If the condition is false then the current test step will be aborted with a wait result, indicating that it should be called again in the near future.
- @param condition The condition to test.
- @param error The NSError object to put the error string into. May be nil, but should usually be the error parameter from the test step execution block.
- @param ... A string describing why the step needs to wait. This is important since this reason will be considered the cause of a timeout error if the step requires waiting for too long. This may be a format string with additional arguments.
- */
-#define KIFTestWaitCondition(condition, error, ...) ({ \
-if (!(condition)) { \
-    if (error) { \
-    *error = [[[NSError alloc] initWithDomain:@"KIFTest" code:KIFTestStepResultWait userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:__VA_ARGS__], NSLocalizedDescriptionKey, nil]] autorelease]; \
-    } \
-    return KIFTestStepResultWait; \
-} \
-})
-
-/*!
- @definen  WSTestConditionBlock
- @abstract  Simplifies adding test condition steps.
- @param  condition  The condition to test.  Will be wrapped in a block and executed later.
- @discussion
- This macro can be used to simplify adding a test step that is evaluating a condition.  It may be used as an alternative to the verbose and cryptic syntax that it hides.
- 
- Example of use:
- 
- [KIFTestStep stepWithDescription:@"Description"  executionBlock:TestConditionBlock( 1 == 1 )];
- */
-#define KIFTestConditionBlock(condition) ({ \
-^(KIFTestStep *step, NSError **error) \
-{ \
-    KIFTestCondition( ( condition ) , error, [step description], @""); \
-    return KIFTestStepResultSuccess; \
-}; \
-})
-
-/*!
- @definen  KIFTestWaitConditionBlock
- @abstract  Simplifies adding test condition steps.
- @param  condition  The condition to test.  Will be wrapped in a block and executed later.
- @discussion
- This macro can be used to simplify adding a test step that is evaluating a condition.  It may be used as an alternative to the verbose and cryptic syntax that it hides.
- 
- Example of use:
- 
- [KIFTestStep stepWithDescription:@"Description"  executionBlock:KIFTestWaitConditionBlock( 1 == 1 )];
- */
-#define KIFTestWaitConditionBlock(condition) ({ \
-^(KIFTestStep *step, NSError **error) \
-{ \
-    KIFTestWaitCondition( ( condition ) , error, [step description], @""); \
-    return KIFTestStepResultSuccess; \
-}; \
-})
-
-/*!
- @enum KIFTestStepResult
- @abstract Result codes from a test step.
- @constant KIFTestStepResultFailure The step failed and the test controller should move to the next scenario.
- @constant KIFTestStepResultSuccess The step succeeded and the test controller should move to the next step in the current scenario.
- @constant KIFTestStepResultWait The test isn't ready yet and should be tried again after a short delay.
- */
-enum {
-    KIFTestStepResultFailure = 0,
-    KIFTestStepResultSuccess,
-    KIFTestStepResultWait,
-};
-typedef NSInteger KIFTestStepResult;
+#import "KIFTypes.h"
 
 
 @class KIFTestStep;
-
-/*!
- @typedef KIFTestStepExecutionBlock
- @param step The step object itself. This is passed back to the block to ensure that there is a pointer to the fully initialized step at the time of execution.
- @param error An error to fill out in the case of a failure or wait condition. Filling out this error is mandatory in these cases to ensure that testing output is useful.
- @result A test result code. Returning KIFTestStepResultWait will cause the step to be tried again on the next iteration.
- */
-typedef KIFTestStepResult (^KIFTestStepExecutionBlock)(KIFTestStep *step, NSError **error);
 
 /*!
  @class KIFTestStep

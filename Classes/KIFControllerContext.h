@@ -5,7 +5,7 @@
 #import <Foundation/Foundation.h>
 
 
-@interface KIFTestControllerNG : NSObject
+@interface KIFControllerContext : NSObject
 
 
 @end

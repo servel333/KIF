@@ -2,10 +2,10 @@
 //
 
 
-#import "KIFTestControllerNG.h"
+#import "KIFControllerContext.h"
 
 
-@implementation KIFTestControllerNG
+@implementation KIFControllerContext
 
 
 - (id)init

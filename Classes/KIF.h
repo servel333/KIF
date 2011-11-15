@@ -8,10 +8,13 @@
  */
 
 
+#import "KIFController.h"
+#import "KIFControllerContext.h"
+#import "KIFControllerDelegate.h"
 #import "KIFMacros.h"
-#import "KIFTestController.h"
-#import "KIFTestStepDelegate.h"
-#import "KIFTypes.h"
+#import "KIFScenario.h"
+#import "KIFStepContext.h"
+#import "KIFStepNotifications.h"
 
 
 /*!

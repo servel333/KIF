@@ -9,6 +9,8 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import "KIFTestStep.h"
+#import "KIFTypes.h"
+#import "KIFMacros.h"
 #import "CGGeometry-KIFAdditions.h"
 #import "UIAccessibilityElement-KIFAdditions.h"
 #import "UIApplication-KIFAdditions.h"

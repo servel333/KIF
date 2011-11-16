@@ -2,16 +2,15 @@
 //
 
 
-#import "KIFTestStepWithExecutionBlock.h"
+#import "KIFStepWithExecutionBlock.h"
 
-#import "KIFTestContext.h"
+#import "KIF.h"
 
 
 #pragma mark -
 
 
-@interface KIFTestStepWithExecutionBlock () {
-}
+@interface KIFStepWithExecutionBlock ()
 
 
 @property (nonatomic, copy) KIFTestStepExecutionBlock executionBlock;
@@ -23,7 +22,7 @@
 #pragma mark -
 
 
-@implementation KIFTestStepWithExecutionBlock
+@implementation KIFStepWithExecutionBlock
 
 
 - (id)init {
@@ -40,7 +39,7 @@
 @synthesize executionBlock;
 
 
-+ (BOOL)testStepResult:(KIFTestStepResult)testStepResult  andError:(NSError *)error  toContext:(KIFTestContext *)context {
++ (BOOL)testStepResult:(KIFTestStepResult)testStepResult  andError:(NSError *)error  toContext:(KIFStepContext *)context {
     
     BOOL succeeded = NO;
     
@@ -69,7 +68,7 @@
 }
 
 
-- (BOOL)runStep:(KIFTestContext *)context {
+- (BOOL)runStep:(KIFStepContext *)context {
     
     KIFTestStepResult result = KIFTestStepResultFailure;
     NSError *error = nil;

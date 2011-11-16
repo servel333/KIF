@@ -20,8 +20,18 @@
 		5582EB7F1472202F006D300E /* KIFScenario.m in Sources */ = {isa = PBXBuildFile; fileRef = 5582EB7D1472202F006D300E /* KIFScenario.m */; };
 		5582EB821472222B006D300E /* KIFMutableStepContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 5582EB801472222B006D300E /* KIFMutableStepContext.h */; };
 		5582EB831472222B006D300E /* KIFMutableStepContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 5582EB811472222B006D300E /* KIFMutableStepContext.m */; };
-		55F537A514709321008361DC /* KIFTestStepWithExecutionBlock.h in Headers */ = {isa = PBXBuildFile; fileRef = 55F537A314709321008361DC /* KIFTestStepWithExecutionBlock.h */; };
-		55F537A614709321008361DC /* KIFTestStepWithExecutionBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 55F537A414709321008361DC /* KIFTestStepWithExecutionBlock.m */; };
+		5582EB8F1472C2C4006D300E /* KIFStep.h in Headers */ = {isa = PBXBuildFile; fileRef = 5582EB8D1472C2C3006D300E /* KIFStep.h */; };
+		5582EB901472C2C4006D300E /* KIFStep.m in Sources */ = {isa = PBXBuildFile; fileRef = 5582EB8E1472C2C3006D300E /* KIFStep.m */; };
+		5582EB921472C607006D300E /* KIFDefaults.h in Headers */ = {isa = PBXBuildFile; fileRef = 5582EB911472C606006D300E /* KIFDefaults.h */; };
+		5582EB941472C68F006D300E /* KIFTestStepResult.h in Headers */ = {isa = PBXBuildFile; fileRef = 5582EB931472C68F006D300E /* KIFTestStepResult.h */; };
+		5582EB961472C6C5006D300E /* KIFTestStepExecutionBlock.h in Headers */ = {isa = PBXBuildFile; fileRef = 5582EB951472C6C4006D300E /* KIFTestStepExecutionBlock.h */; };
+		5582EBA214731C45006D300E /* KIFUserData.h in Headers */ = {isa = PBXBuildFile; fileRef = 5582EBA014731C43006D300E /* KIFUserData.h */; };
+		5582EBA314731C45006D300E /* KIFUserData.m in Sources */ = {isa = PBXBuildFile; fileRef = 5582EBA114731C44006D300E /* KIFUserData.m */; };
+		5582EBA914737273006D300E /* KIFScenarioNotifications.h in Headers */ = {isa = PBXBuildFile; fileRef = 5582EBA814737272006D300E /* KIFScenarioNotifications.h */; };
+		5582EBAC147372B3006D300E /* KIFScenarioContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 5582EBAA147372B0006D300E /* KIFScenarioContext.h */; };
+		5582EBAD147372B3006D300E /* KIFScenarioContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 5582EBAB147372B1006D300E /* KIFScenarioContext.m */; };
+		55F537A514709321008361DC /* KIFStepWithExecutionBlock.h in Headers */ = {isa = PBXBuildFile; fileRef = 55F537A314709321008361DC /* KIFStepWithExecutionBlock.h */; };
+		55F537A614709321008361DC /* KIFStepWithExecutionBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 55F537A414709321008361DC /* KIFStepWithExecutionBlock.m */; };
 		55F537AE1470A04D008361DC /* KIFMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 55F537AD1470A04D008361DC /* KIFMacros.h */; };
 		55F537B01470A0F3008361DC /* KIF.h in Headers */ = {isa = PBXBuildFile; fileRef = 55F537AF1470A0F3008361DC /* KIF.h */; };
 		55F537B21470A7BF008361DC /* KIFTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 55F537B11470A7BF008361DC /* KIFTypes.h */; };
@@ -69,9 +79,19 @@
 		5582EB7D1472202F006D300E /* KIFScenario.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KIFScenario.m; sourceTree = "<group>"; };
 		5582EB801472222B006D300E /* KIFMutableStepContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KIFMutableStepContext.h; sourceTree = "<group>"; };
 		5582EB811472222B006D300E /* KIFMutableStepContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KIFMutableStepContext.m; sourceTree = "<group>"; };
+		5582EB8D1472C2C3006D300E /* KIFStep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KIFStep.h; sourceTree = "<group>"; };
+		5582EB8E1472C2C3006D300E /* KIFStep.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KIFStep.m; sourceTree = "<group>"; };
+		5582EB911472C606006D300E /* KIFDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KIFDefaults.h; sourceTree = "<group>"; };
+		5582EB931472C68F006D300E /* KIFTestStepResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KIFTestStepResult.h; sourceTree = "<group>"; };
+		5582EB951472C6C4006D300E /* KIFTestStepExecutionBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KIFTestStepExecutionBlock.h; sourceTree = "<group>"; };
+		5582EBA014731C43006D300E /* KIFUserData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KIFUserData.h; sourceTree = "<group>"; };
+		5582EBA114731C44006D300E /* KIFUserData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KIFUserData.m; sourceTree = "<group>"; };
+		5582EBA814737272006D300E /* KIFScenarioNotifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KIFScenarioNotifications.h; sourceTree = "<group>"; };
+		5582EBAA147372B0006D300E /* KIFScenarioContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KIFScenarioContext.h; sourceTree = "<group>"; };
+		5582EBAB147372B1006D300E /* KIFScenarioContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KIFScenarioContext.m; sourceTree = "<group>"; };
 		55F5379814706F4C008361DC /* KIFStepNotifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KIFStepNotifications.h; sourceTree = "<group>"; };
-		55F537A314709321008361DC /* KIFTestStepWithExecutionBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KIFTestStepWithExecutionBlock.h; sourceTree = "<group>"; };
-		55F537A414709321008361DC /* KIFTestStepWithExecutionBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KIFTestStepWithExecutionBlock.m; sourceTree = "<group>"; };
+		55F537A314709321008361DC /* KIFStepWithExecutionBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KIFStepWithExecutionBlock.h; sourceTree = "<group>"; };
+		55F537A414709321008361DC /* KIFStepWithExecutionBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KIFStepWithExecutionBlock.m; sourceTree = "<group>"; };
 		55F537AD1470A04D008361DC /* KIFMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KIFMacros.h; sourceTree = "<group>"; };
 		55F537AF1470A0F3008361DC /* KIF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KIF.h; sourceTree = "<group>"; };
 		55F537B11470A7BF008361DC /* KIFTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KIFTypes.h; sourceTree = "<group>"; };
@@ -166,26 +186,36 @@
 				5560FBF314717F1F00FBE89E /* KIFControllerContext.h */,
 				5560FBF414717F2000FBE89E /* KIFControllerContext.m */,
 				5560FBEF14717E9500FBE89E /* KIFControllerNotifications.h */,
+				5582EB911472C606006D300E /* KIFDefaults.h */,
 				55F537AD1470A04D008361DC /* KIFMacros.h */,
 				5582EB801472222B006D300E /* KIFMutableStepContext.h */,
 				5582EB811472222B006D300E /* KIFMutableStepContext.m */,
 				5582EB7C1472202F006D300E /* KIFScenario.h */,
 				5582EB7D1472202F006D300E /* KIFScenario.m */,
+				5582EBAA147372B0006D300E /* KIFScenarioContext.h */,
+				5582EBAB147372B1006D300E /* KIFScenarioContext.m */,
+				5582EBA814737272006D300E /* KIFScenarioNotifications.h */,
 				55115AA61471890400ACBA30 /* KIFSingleton.h */,
+				5582EB8D1472C2C3006D300E /* KIFStep.h */,
+				5582EB8E1472C2C3006D300E /* KIFStep.m */,
 				5560FBF714717F4000FBE89E /* KIFStepContext.h */,
 				5560FBF814717F4000FBE89E /* KIFStepContext.m */,
 				55F5379814706F4C008361DC /* KIFStepNotifications.h */,
 				5560FBFB1471805A00FBE89E /* KIFStepProvider.h */,
 				5560FBFC1471805A00FBE89E /* KIFStepProvider.m */,
+				55F537A314709321008361DC /* KIFStepWithExecutionBlock.h */,
+				55F537A414709321008361DC /* KIFStepWithExecutionBlock.m */,
 				AAB0728613971A98008AF393 /* KIFTestController.h */,
 				AAB0728713971A98008AF393 /* KIFTestController.m */,
 				AAB0728813971A98008AF393 /* KIFTestScenario.h */,
 				AAB0728913971A98008AF393 /* KIFTestScenario.m */,
 				AAB0728A13971A98008AF393 /* KIFTestStep.h */,
 				AAB0728B13971A98008AF393 /* KIFTestStep.m */,
-				55F537A314709321008361DC /* KIFTestStepWithExecutionBlock.h */,
-				55F537A414709321008361DC /* KIFTestStepWithExecutionBlock.m */,
+				5582EB951472C6C4006D300E /* KIFTestStepExecutionBlock.h */,
+				5582EB931472C68F006D300E /* KIFTestStepResult.h */,
 				55F537B11470A7BF008361DC /* KIFTypes.h */,
+				5582EBA014731C43006D300E /* KIFUserData.h */,
+				5582EBA114731C44006D300E /* KIFUserData.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -234,7 +264,7 @@
 				AAB072B213971AB2008AF393 /* UIWindow-KIFAdditions.h in Headers */,
 				CDFD8E86139728B4008D299F /* NSFileManager-KIFAdditions.h in Headers */,
 				39160B1113D1E6BB00311E38 /* LoadableCategory.h in Headers */,
-				55F537A514709321008361DC /* KIFTestStepWithExecutionBlock.h in Headers */,
+				55F537A514709321008361DC /* KIFStepWithExecutionBlock.h in Headers */,
 				55F537AE1470A04D008361DC /* KIFMacros.h in Headers */,
 				55F537B01470A0F3008361DC /* KIF.h in Headers */,
 				55F537B21470A7BF008361DC /* KIFTypes.h in Headers */,
@@ -247,6 +277,13 @@
 				55115AA71471890400ACBA30 /* KIFSingleton.h in Headers */,
 				5582EB7E1472202F006D300E /* KIFScenario.h in Headers */,
 				5582EB821472222B006D300E /* KIFMutableStepContext.h in Headers */,
+				5582EB8F1472C2C4006D300E /* KIFStep.h in Headers */,
+				5582EB921472C607006D300E /* KIFDefaults.h in Headers */,
+				5582EB941472C68F006D300E /* KIFTestStepResult.h in Headers */,
+				5582EB961472C6C5006D300E /* KIFTestStepExecutionBlock.h in Headers */,
+				5582EBA214731C45006D300E /* KIFUserData.h in Headers */,
+				5582EBA914737273006D300E /* KIFScenarioNotifications.h in Headers */,
+				5582EBAC147372B3006D300E /* KIFScenarioContext.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,13 +348,16 @@
 				AAB072B113971AB2008AF393 /* UIView-KIFAdditions.m in Sources */,
 				AAB072B313971AB2008AF393 /* UIWindow-KIFAdditions.m in Sources */,
 				CDFD8E87139728B4008D299F /* NSFileManager-KIFAdditions.m in Sources */,
-				55F537A614709321008361DC /* KIFTestStepWithExecutionBlock.m in Sources */,
+				55F537A614709321008361DC /* KIFStepWithExecutionBlock.m in Sources */,
 				55F537B71470C342008361DC /* KIFController.m in Sources */,
 				5560FBF614717F2000FBE89E /* KIFControllerContext.m in Sources */,
 				5560FBFA14717F4000FBE89E /* KIFStepContext.m in Sources */,
 				5560FBFE1471805A00FBE89E /* KIFStepProvider.m in Sources */,
 				5582EB7F1472202F006D300E /* KIFScenario.m in Sources */,
 				5582EB831472222B006D300E /* KIFMutableStepContext.m in Sources */,
+				5582EB901472C2C4006D300E /* KIFStep.m in Sources */,
+				5582EBA314731C45006D300E /* KIFUserData.m in Sources */,
+				5582EBAD147372B3006D300E /* KIFScenarioContext.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

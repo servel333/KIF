@@ -19,4 +19,10 @@
 }
 
 
+#pragma mark Properties
+
+
+@synthesize steps = _steps;
+
+
 @end

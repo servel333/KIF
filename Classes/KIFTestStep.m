@@ -7,10 +7,10 @@
 //  See the LICENSE file distributed with this work for the terms under
 //  which Square, Inc. licenses this file to you.
 
-#import <QuartzCore/QuartzCore.h>
 #import "KIFTestStep.h"
-#import "KIFTypes.h"
-#import "KIFMacros.h"
+
+#import <QuartzCore/QuartzCore.h>
+#import "KIF.h"
 #import "CGGeometry-KIFAdditions.h"
 #import "UIAccessibilityElement-KIFAdditions.h"
 #import "UIApplication-KIFAdditions.h"
@@ -20,7 +20,7 @@
 #import "UIWindow-KIFAdditions.h"
 
 
-static NSTimeInterval KIFTestStepDefaultTimeout = 10.0;
+static NSTimeInterval KIFTestStepDefaultTimeout = KIF_DEFAULT_TIMEOUT;
 
 @interface KIFTestStep ()
 

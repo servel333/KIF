@@ -4,10 +4,25 @@
 #import <Foundation/Foundation.h>
 
 
+@class KIFControllerContext;
+
+
+#pragma mark -
+
+
 @protocol KIFControllerNotifications
 
 
-@required
+@optional
+
+
+- (BOOL)shouldStartTesting:(KIFControllerContext *)context;
+
+
+- (BOOL)testingWillBegin:(KIFControllerContext *)context;
+
+
+- (void)testingWillTerminate:(KIFControllerContext *)context;
 
 
 @end

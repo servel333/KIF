@@ -16,12 +16,24 @@
 @interface KIFStepContext : NSObject {
     KIFController *_controller;
     KIFScenario *_scenario;
-    KIFStep *_step;
+    NSObject<KIFStepNotifications> *_step;
     NSTimeInterval _firstRanStep;
     NSTimeInterval _lastRanStep;
     BOOL _runStepAgain;
     NSError *_error;
 }
+
+
+#pragma mark Convenience constructors
+
+
+/*!
+ @abstract  Creates and returns an empty context.
+ */
++ (id)context;
+
+
+#pragma mark Properties
 
 
 /*!
@@ -42,7 +54,7 @@
  @property  step
  @abstract  The currently executing step.
  */
-@property (nonatomic, readonly) KIFStep *step;
+@property (nonatomic, readonly) NSObject<KIFStepNotifications> *step;
 
 
 /*!

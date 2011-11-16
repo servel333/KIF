@@ -12,9 +12,21 @@
 @interface KIFMutableStepContext : KIFStepContext
 
 
+#pragma mark Convenience constructors
+
+
+/*!
+ @abstract  Creates and returns an empty context.
+ */
++ (id)context;
+
+
+#pragma mark Setters
+
+
 - (void)setController:(KIFController *)controller;
 - (void)setScenario:(KIFScenario *)scenario;
-- (void)setStep:(KIFStep *)step;
+- (void)setStep:(NSObject<KIFStepNotifications> *)step;
 - (void)setFirstRunStep:(NSTimeInterval)firstRanStep;
 - (void)setLastRunStep:(NSTimeInterval)lastRanStep;
 

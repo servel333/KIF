@@ -2,10 +2,10 @@
 //
 
 
-#import "KIFControllerContext.h"
+#import "KIFScenarioContext.h"
 
 
-@implementation KIFControllerContext
+@implementation KIFScenarioContext
 
 
 - (id)init

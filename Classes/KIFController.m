@@ -11,9 +11,6 @@
 @implementation KIFController
 
 
-KIFSingletonImplementation(KIFController, sharedController);
-
-
 - (id)init
 {
     self = [super init];
@@ -23,6 +20,9 @@ KIFSingletonImplementation(KIFController, sharedController);
     
     return self;
 }
+
+
+KIFSingletonImplementation(KIFController, sharedController);
 
 
 @end

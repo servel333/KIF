@@ -19,6 +19,15 @@
 }
 
 
+#pragma mark Convenience constructors
+
+
++ (id)context
+{
+    return [[[self alloc] init] autorelease];
+}
+
+
 #pragma mark Setters
 
 
@@ -38,7 +47,7 @@
 }
 
 
-- (void)setStep:(KIFStep *)step;
+- (void)setStep:(NSObject<KIFStepNotifications> *)step;
 {
     [_step release];
     _step = step;

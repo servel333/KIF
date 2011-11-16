@@ -7,12 +7,13 @@
 //  See the LICENSE file distributed with this work for the terms under
 //  which Square, Inc. licenses this file to you.
 
-#import <UIKit/UIKit.h>
 
-#import "KIFTypes.h"
+#import <UIKit/UIKit.h>
+#import "KIF.h"
 
 
 @class KIFTestStep;
+
 
 /*!
  @class KIFTestStep
@@ -21,7 +22,7 @@
  
  Steps are the building blocks of scenarios, and should be very simple. A number of useful factory steps are provided for mimicking basic user interaction. These steps leverage the built in accessibility of iOS to find and interact with views. As such, the accessibility inspector needs to be enabled under Settings in the simulator for them to work.
  */
-@interface KIFTestStep : NSObject {
+@interface KIFTestStep : NSObject <KIFStepNotifications> {
     KIFTestStepExecutionBlock executionBlock;
     NSString *description;
     NSString *notificationName;

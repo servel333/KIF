@@ -4,10 +4,7 @@
 
 #import "KIFStepContext.h"
 
-#import "KIFStepContextDelegate.h"
-#import "KIFController.h"
-#import "KIFScenario.h"
-#import "KIFStepNotifications.h"
+#import "KIF.h"
 
 
 #pragma mark -
@@ -37,15 +34,25 @@
 
 
 - (void)dealloc {
-
+    
     [_controller release];
     [_scenario release];
     [_step release];
-
+    
+    [super dealloc];
 }
 
 
-#pragma mark properties
+#pragma mark Convenience constructors
+
+
++ (id)context
+{
+    return [[[self alloc] init] autorelease];
+}
+
+
+#pragma mark Properties
 
 
 @synthesize controller = _controller;

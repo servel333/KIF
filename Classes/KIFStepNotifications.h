@@ -7,12 +7,15 @@
 
 
 @class KIFStepContext;
-
-
 @protocol KIFStepNotifications;
 
 
+/* !
+ @typedef  KIFStep
+ * /
 typedef NSObject<KIFStepNotifications> KIFStep;
+@class KIFStep;  // Treat KIFStep as a class and color it as such.
+// */
 
 
 #pragma mark -

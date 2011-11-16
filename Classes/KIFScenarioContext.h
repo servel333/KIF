@@ -6,14 +6,19 @@
 
 
 @class KIFController;
+@class KIFScenario;
 
 
-@interface KIFControllerContext : NSObject {
+@interface KIFScenarioContext : NSObject {
     KIFController *_controller;
+    KIFScenario *_scenario;
 }
 
 
 @property (nonatomic, readonly) KIFController *controller;
+
+
+@property (nonatomic, readonly) KIFScenario *scenario;
 
 
 @end

@@ -10,6 +10,9 @@
 #import <UIKit/UIKit.h>
 
 
+#define  KIF_ERROR_DOMAIN  (@"KIFTest")
+
+
 /*!
  @define KIFTestCondition
  @abstract Tests a condition and returns a failure result if the condition isn't true.
@@ -21,7 +24,7 @@
 #define KIFTestCondition(condition, error, ...) ({ \
 if (!(condition)) { \
     if (error) { \
-        *error = [[[NSError alloc] initWithDomain:@"KIFTest" code:KIFTestStepResultFailure userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:__VA_ARGS__], NSLocalizedDescriptionKey, nil]] autorelease]; \
+        *error = [[[NSError alloc] initWithDomain:KIF_ERROR_DOMAIN code:KIFTestStepResultFailure userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:__VA_ARGS__], NSLocalizedDescriptionKey, nil]] autorelease]; \
     } \
     [KIFTestStep stepFailed]; \
     return KIFTestStepResultFailure; \
@@ -39,7 +42,7 @@ if (!(condition)) { \
 #define KIFTestWaitCondition(condition, error, ...) ({ \
 if (!(condition)) { \
     if (error) { \
-    *error = [[[NSError alloc] initWithDomain:@"KIFTest" code:KIFTestStepResultWait userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:__VA_ARGS__], NSLocalizedDescriptionKey, nil]] autorelease]; \
+    *error = [[[NSError alloc] initWithDomain:KIF_ERROR_DOMAIN code:KIFTestStepResultWait userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:__VA_ARGS__], NSLocalizedDescriptionKey, nil]] autorelease]; \
     } \
     return KIFTestStepResultWait; \
 } \
@@ -300,6 +303,17 @@ typedef KIFTestStepResult (^KIFTestStepExecutionBlock)(KIFTestStep *step, NSErro
  @result A configured test step.
  */
 + (id)stepToWaitForTimeInterval:(NSTimeInterval)interval description:(NSString *)description;
+
+/*!
+ @method  stepToWaitFromTimeIntervalSinceReferenceData:durationTimeInterval:description:
+ @abstract  A step that waits for a certain amount of time with a custom starting time.
+ @param  getStartTimeBlock  A block that gets the start time for this wait.
+ @param  duration  The number of seconds to wait from the start time before executing the next step.
+ @param  description  A description of why the wait is necessary. Required.
+ @result  A configured test step.
+ @discussion  In general when waiting for the app to get into a known state, it's better to use -stepToWaitForTappableViewWithAccessibilityLabel, however this step may be useful in some situations as well.
+ */
++ (id)stepToWaitFromTimeIntervalSinceReferenceData:(NSTimeInterval(^)(void))getStartTimeBlock durationTimeInterval:(NSTimeInterval)duration description:(NSString *)description;
 
 /*!
  @method stepToWaitForNotificationName:object:

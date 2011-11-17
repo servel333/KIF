@@ -2,10 +2,10 @@
 //
 
 
-#import "KIFControllerContext.h"
+#import "KIFStepArray.h"
 
 
-@implementation KIFControllerContext
+@implementation KIFStepMutableArray
 
 
 - (id)init
@@ -17,12 +17,6 @@
     
     return self;
 }
-
-
-#pragma mark Properties
-
-
-@synthesize controller = _controller;
 
 
 @end

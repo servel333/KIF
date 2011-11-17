@@ -5,6 +5,10 @@
 #import <Foundation/Foundation.h>
 
 
+@class KIFContext;
+@protocol KIFStepNotifications;
+
+
 @interface KIFScenario : NSObject {
     NSArray *_steps;
 }

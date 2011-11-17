@@ -4,7 +4,7 @@
 #import <Foundation/Foundation.h>
 
 
-@class KIFControllerContext;
+@class KIFContext;
 
 
 #pragma mark -
@@ -16,13 +16,13 @@
 @optional
 
 
-- (BOOL)shouldStartTesting:(KIFControllerContext *)context;
+- (BOOL)shouldStartTesting:(KIFContext *)context;
 
 
-- (BOOL)testingWillBegin:(KIFControllerContext *)context;
+- (BOOL)testingWillBegin:(KIFContext *)context;
 
 
-- (void)testingWillTerminate:(KIFControllerContext *)context;
+- (void)testingWillTerminate:(KIFContext *)context;
 
 
 @end

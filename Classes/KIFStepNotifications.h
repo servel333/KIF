@@ -3,10 +3,9 @@
 
 
 #import <Foundation/Foundation.h>
-#import "KIFTypes.h"
 
 
-@class KIFStepContext;
+@class KIFContext;
 @protocol KIFStepNotifications;
 
 
@@ -38,17 +37,22 @@ typedef NSObject<KIFStepNotifications> KIFStep;
 /*!
  @method  shouldRunStep
  @abstract  Gets a value indicating if this step should be run.
- @discussion  When implemented, used to test if the step should be run; otherwise the stpe is run.  This is called first.  The step is considered successful even if shouldRunStep returns false (NO).
+ @discussion  When implemented, used to test if the step should be run; otherwise the step is run.  This is called first.  The step is considered successful even if shouldRunStep returns false (NO).
  */
-- (BOOL)shouldRunStep:(KIFStepContext *)context;
+- (BOOL)shouldRunStep:(KIFContext *)context;
+
+
+/*!
+ */
+- (NSArray *)preSteps;
 
 
 /*!
  @method  stepWillBegin
- @abstract  Performs any needed step preperation.
+ @abstract  Performs any needed step preparation.
  @discussion  When implemented, may be used to perform pre-step 
  */
-- (BOOL)stepWillBegin:(KIFStepContext *)context;
+- (BOOL)stepWillBegin:(KIFContext *)context;
 
 
 /*!
@@ -57,7 +61,12 @@ typedef NSObject<KIFStepNotifications> KIFStep;
  @result  Returns a value indicating the success of this step.
  @discussion  
  */
-- (BOOL)runStep:(KIFStepContext *)context;
+- (BOOL)runStep:(KIFContext *)context;
+
+
+/*!
+ */
+- (NSArray *)postSteps;
 
 
 /*!
@@ -65,7 +74,7 @@ typedef NSObject<KIFStepNotifications> KIFStep;
  @abstract  Performs any needed step cleanup.
  @discussion  When implemented, may be used to perform post-step cleanup.  Always run even if shouldRunStep
  */
-- (void)stepWillTerminate:(KIFStepContext *)context;
+- (void)stepWillTerminate:(KIFContext *)context;
 
 
 #pragma mark Step descriptors

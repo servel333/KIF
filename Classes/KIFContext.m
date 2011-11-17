@@ -2,7 +2,7 @@
 //
 
 
-#import "KIFStepContext.h"
+#import "KIFContext.h"
 
 #import "KIF.h"
 
@@ -10,7 +10,7 @@
 #pragma mark -
 
 
-@implementation KIFStepContext
+@implementation KIFContext
 
 
 - (id)init
@@ -35,11 +35,11 @@
 
 - (void)dealloc {
     
-    [_controller release];
-    [_scenario release];
-    [_step release];
+    [_controller  release];
+    [_scenario  release];
+    [_step  release];
     
-    [super dealloc];
+    [super  dealloc];
 }
 
 

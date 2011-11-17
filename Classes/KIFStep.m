@@ -5,7 +5,7 @@
 #import "KIFStep.h"
 
 #import "KIF.h"
-#import "KIFMutableStepContext.h"
+#import "KIFMutableContext.h"
 
 
 #pragma mark -
@@ -15,19 +15,19 @@
 
 
 + (BOOL)performShouldRunStepIfAvailable:(NSObject<KIFStepNotifications> *)step
-                            withContext:(KIFStepContext *)context;
+                            withContext:(KIFContext *)context;
 
 
 + (BOOL)performStepWillBeginIfAvailable:(NSObject<KIFStepNotifications> *)step
-                            withContext:(KIFStepContext *)context;
+                            withContext:(KIFContext *)context;
 
 
 + (BOOL)performRunStepIfAvailable:(NSObject<KIFStepNotifications> *)step
-                      withContext:(KIFStepContext *)context;
+                      withContext:(KIFContext *)context;
 
 
 + (void)performStepWillTerminateIfAvailable:(NSObject<KIFStepNotifications> *)step
-                                withContext:(KIFStepContext *)context;
+                                withContext:(KIFContext *)context;
 
 
 @end
@@ -58,7 +58,7 @@
  withController:(KIFController *)controller
 {
     BOOL success = YES;
-    KIFMutableStepContext *context = [KIFMutableStepContext  context];
+    KIFMutableContext *context = [KIFMutableContext  context];
     
     [context  setController:controller];
     [context  setScenario:scenario];
@@ -68,7 +68,7 @@
     context.runStepAgain = NO;
     context.error = nil;
     
-    
+    success = [self  runStep:step withContext:context];
     
     if (context.runStepAgain) {
         // FIXME: Run the step again if no errors.
@@ -84,13 +84,14 @@
 
 
 + (BOOL)runStep:(NSObject<KIFStepNotifications> *)step
-    withContext:(KIFStepContext *)context
+    withContext:(KIFContext *)context
 {
     BOOL success = YES;
     
     if (![self  performShouldRunStepIfAvailable:step  withContext:context]) {
         
         success = NO;
+        
         [self performStepWillTerminateIfAvailable:step  withContext:context];
         
         // Run stepWillTerminate, clean up and go to the next step.
@@ -130,7 +131,7 @@
 
 
 + (BOOL)performShouldRunStepIfAvailable:(NSObject<KIFStepNotifications> *)step
-          withContext:(KIFStepContext *)context
+          withContext:(KIFContext *)context
 {
     if ([step  respondsToSelector:@selector(shouldRunStep:)]) {
         return [step  shouldRunStep:context];
@@ -141,10 +142,22 @@
 
 
 + (BOOL)performStepWillBeginIfAvailable:(NSObject<KIFStepNotifications> *)step
-          withContext:(KIFStepContext *)context
+          withContext:(KIFContext *)context
 {
+    BOOL result = YES;
+    
     if ([step  respondsToSelector:@selector(stepWillBegin:)]) {
-        return [step  stepWillBegin:context];
+        
+        @try {
+            result = [step  stepWillBegin:context];
+        }
+        @catch (id exception) {
+            
+            [NSError errorWithDomain:@"KIF"  code:<#(NSInteger)#> userInfo:<#(NSDictionary *)#>
+            
+            context.error = [[[NSError alloc] initWithDomain:@"KIFTest" code:KIFTestStepResultFailure userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"Step threw exception: %@", exception], NSLocalizedDescriptionKey, nil]] autorelease];
+        }
+        
     }
     
     return YES;
@@ -152,7 +165,7 @@
 
 
 + (BOOL)performRunStepIfAvailable:(NSObject<KIFStepNotifications> *)step
-    withContext:(KIFStepContext *)context
+    withContext:(KIFContext *)context
 {
     if ([step  respondsToSelector:@selector(runStep:)]) {
         return [step  runStep:context];
@@ -163,7 +176,7 @@
 
 
 + (void)performStepWillTerminateIfAvailable:(NSObject<KIFStepNotifications> *)step
-              withContext:(KIFStepContext *)context
+              withContext:(KIFContext *)context
 {
     if ([step  respondsToSelector:@selector(stepWillTerminate:)]) {
         [step  stepWillTerminate:context];
@@ -174,25 +187,25 @@
 #pragma mark 
 
 
-- (BOOL)shouldRunStep:(KIFStepContext *)context;
+- (BOOL)shouldRunStep:(KIFContext *)context;
 {
     return YES;
 }
 
 
-- (BOOL)stepWillBegin:(KIFStepContext *)context;
+- (BOOL)stepWillBegin:(KIFContext *)context;
 {
     return YES;
 }
 
 
-- (BOOL)runStep:(KIFStepContext *)context;
+- (BOOL)runStep:(KIFContext *)context;
 {
     return YES;
 }
 
 
-- (void)stepWillTerminate:(KIFStepContext *)context
+- (void)stepWillTerminate:(KIFContext *)context
 {
     // Do nothing
 }

@@ -4,6 +4,9 @@
 
 #import "KIFController.h"
 
+#import "KIFContext.h"
+#import "KIFControllerNotifications.h"
+
 
 #pragma mark -
 

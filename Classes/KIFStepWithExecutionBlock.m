@@ -39,7 +39,7 @@
 @synthesize executionBlock;
 
 
-+ (BOOL)testStepResult:(KIFTestStepResult)testStepResult  andError:(NSError *)error  toContext:(KIFStepContext *)context {
++ (BOOL)testStepResult:(KIFTestStepResult)testStepResult  andError:(NSError *)error  toContext:(KIFContext *)context {
     
     BOOL succeeded = NO;
     
@@ -68,7 +68,7 @@
 }
 
 
-- (BOOL)runStep:(KIFStepContext *)context {
+- (BOOL)runStep:(KIFContext *)context {
     
     KIFTestStepResult result = KIFTestStepResultFailure;
     NSError *error = nil;

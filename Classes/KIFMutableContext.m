@@ -2,10 +2,12 @@
 //
 
 
-#import "KIFMutableStepContext.h"
+#import "KIFMutableContext.h"
+
+#import "KIF.h"
 
 
-@implementation KIFMutableStepContext
+@implementation KIFMutableContext
 
 
 - (id)init
@@ -65,6 +67,16 @@
 {
     _lastRanStep = lastRanStep;
 }
+
+
+#pragma mark Properties
+
+
+@synthesize controller = _controller;
+@synthesize scenario = _scenario;
+@synthesize step = _step;
+@synthesize firstRanStep = _firstRanStep;
+@synthesize lastRanStep = _lastRanStep;
 
 
 @end

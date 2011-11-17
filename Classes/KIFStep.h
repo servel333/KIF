@@ -5,12 +5,30 @@
 #import <Foundation/Foundation.h>
 
 
-@class KIFStepContext;
+@class KIFContext;
+@class KIFController;
+@class KIFScenario;
+@class UIView;
 @protocol KIFStepNotifications;
 
 
-typedef BOOL(^KIFConditionalBlock)(void);
-typedef NSString *(^KIFGetLabelBlock)(void);
+#pragma mark Blocks
+
+
+// Conditional blocks
+typedef  BOOL (^KIFConditionalBlock)(void);
+
+// Match blocks
+typedef  BOOL (^KIFMatchUIViewBlock)(UIView *view);
+
+// Get blocks
+typedef  id             (^KIFGetObjectBlock         )(void);
+typedef  NSString *     (^KIFGetStringBlock         )(void);
+typedef  NSInteger      (^KIFGetNSIntegerBlock      )(void);
+typedef  NSTimeInterval (^KIFGetNSTimeIntervalBlock )(void);
+
+
+#pragma mark -
 
 
 @interface KIFStep : NSObject <KIFStepNotifications> {
@@ -23,25 +41,57 @@ typedef NSString *(^KIFGetLabelBlock)(void);
 #pragma mark stepTo...
 
 
-+ (id)stepToTapViewWithLabelBlock:(KIFGetLabelBlock)getLabelBlock;
+/*
+ @abstract  Step to tap a view when the block returns true (YES) on a view.
+ @param  matchBlock  A block that should return true (YES) when it matches the view to tap.
+ */
++ (id)stepToTapViewMatching:(KIFMatchUIViewBlock)matchBlock;
 
 
-+ (id)stepToTest:(KIFConditionalBlock)conditionalBlock;
+/*
+ @abstract  
+ @param  getLabelblock  A block that will return the 
+ */
++ (id)stepToTapViewMatchingLabelBlock:(KIFGetStringBlock)getLabelBlock;
+//  label:(NSString *)label              value:(NSString *)value         traits:(UIAccessibilityTraits)traits             tag:(NSInteger)tag
+//  label:(KIFGetStringBlock)labelBlock  value:(KIFGetStringBlock)value  traits:(KIFGetUIAccessibilityTraitsBlock)traits  tag:(KIFGetNSIntegerBlock)tag
+
++ (id)stepToRunIf:(KIFConditionalBlock)runConditionalBlock  andTapViewMatchingLabelBlock:(KIFGetStringBlock)getLabelBlock;
+
++ (id)stepToWaitFor:(KIFConditionalBlock)getContinueConditionBlock;
++ (id)stepToWaitTimeInterval:(NSTimeInterval)duration;
++ (id)stepToWaitFromTimeIntervalSinceReferenceData:(KIFGetNSTimeIntervalBlock)getStartTimeBlock  durationTimeInterval:(NSTimeInterval)duration;
+
++ (id)stepToRunIf:(KIFConditionalBlock)runConditionalBlock  andWaitFor:(KIFConditionalBlock)waitConditionalBlock;
++ (id)stepToSucceedIf:(KIFConditionalBlock)testConditionalBlock;
++ (id)stepToRunIf:(KIFConditionalBlock)runConditionalBlock  andSucceedIf:(KIFConditionalBlock)testConditionalBlock;
+
+
+#pragma mark runStep...
+
+
++ (BOOL)runStep:(NSObject<KIFStepNotifications> *)step
+   fromScenario:(KIFScenario *)scenario
+ withController:(KIFController *)controller;
+
+
++ (BOOL)runStep:(NSObject<KIFStepNotifications> *)step
+    withContext:(KIFContext *)context;
 
 
 #pragma mark KIFStepNotifications Protocol
 
 
-- (BOOL)shouldRunStep:(KIFStepContext *)context;
+- (BOOL)shouldRunStep:(KIFContext *)context;
 
 
-- (BOOL)stepWillBegin:(KIFStepContext *)context;
+- (BOOL)stepWillBegin:(KIFContext *)context;
 
 
-- (BOOL)runStep:(KIFStepContext *)context;
+- (BOOL)runStep:(KIFContext *)context;
 
 
-- (void)stepWillTerminate:(KIFStepContext *)context;
+- (void)stepWillTerminate:(KIFContext *)context;
 
 
 - (NSString *)stepDescription;

@@ -8,7 +8,7 @@
 @interface KIFUserData ()
 
 
-@property (nonatomic) NSMutableDictionary *dictionary;
+@property (nonatomic, readonly) NSMutableDictionary *dictionary;
 
 
 @end
@@ -24,10 +24,20 @@
 {
     self = [super init];
     if (self) {
+        
         // Initialization code here.
+        _dictionary = [[NSDictionary  alloc]  init];
+        
     }
     
     return self;
+}
+
+
+- (void)dealloc
+{
+    [_dictionary  release];
+    [super  dealloc];
 }
 
 
@@ -42,79 +52,79 @@
 
 - (NSArray *)allKeys
 {
-    return [_dictionary  allKeys];
+    return [self.dictionary  allKeys];
 }
 
 
 - (NSArray *)allKeysForObject:(KIFUserDataValueType)anObject
 {
-    return [_dictionary  allKeysForObject:anObject];
+    return [self.dictionary  allKeysForObject:anObject];
 }
 
 
 - (NSArray *)allValues
 {
-    return [_dictionary  allValues];
+    return [self.dictionary  allValues];
 }
 
 
 - (NSEnumerator *)objectEnumerator
 {
-    return [_dictionary  objectEnumerator];
+    return [self.dictionary  objectEnumerator];
 }
 
 
 - (NSArray *)objectsForKeys:(NSArray *)keys notFoundMarker:(KIFUserDataValueType)marker
 {
-    return [_dictionary  objectsForKeys:keys  notFoundMarker:marker];
+    return [self.dictionary  objectsForKeys:keys  notFoundMarker:marker];
 }
 
 
 - (NSArray *)keysSortedByValueUsingSelector:(SEL)comparator
 {
-    return [_dictionary  keysSortedByValueUsingSelector:comparator];
+    return [self.dictionary  keysSortedByValueUsingSelector:comparator];
 }
 
 
 - (void)getObjects:(KIFUserDataValueType *)objects andKeys:(KIFUserDataKeyType *)keys
 {
-    return [_dictionary  getObjects:objects  andKeys:keys];
+    return [self.dictionary  getObjects:objects  andKeys:keys];
 }
 
 
 - (void)removeObjectForKey:(KIFUserDataKeyType)aKey
 {
-    return [_dictionary  removeObjectForKey:aKey];
+    return [self.dictionary  removeObjectForKey:aKey];
 }
 
 
 - (void)setObject:(KIFUserDataValueType)anObject forKey:(KIFUserDataKeyType)aKey
 {
-    return [_dictionary  setObject:anObject  forKey:aKey];
+    return [self.dictionary  setObject:anObject  forKey:aKey];
 }
 
 
 - (void)addEntriesFromDictionary:(NSDictionary *)otherDictionary
 {
-    return [_dictionary  addEntriesFromDictionary:otherDictionary];
+    return [self.dictionary  addEntriesFromDictionary:otherDictionary];
 }
 
 
 - (void)removeAllObjects
 {
-    return [_dictionary  removeAllObjects];
+    return [self.dictionary  removeAllObjects];
 }
 
 
 - (void)removeObjectsForKeys:(NSArray *)keyArray
 {
-    return [_dictionary  removeObjectsForKeys:keyArray];
+    return [self.dictionary  removeObjectsForKeys:keyArray];
 }
 
 
 - (void)setDictionary:(NSDictionary *)otherDictionary
 {
-    return [_dictionary  setDictionary:otherDictionary];
+    return [self.dictionary  setDictionary:otherDictionary];
 }
 
 

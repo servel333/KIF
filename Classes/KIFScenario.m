@@ -4,6 +4,8 @@
 
 #import "KIFScenario.h"
 
+#import "KIFStepNotifications.h"
+
 
 @implementation KIFScenario
 
@@ -23,6 +25,15 @@
 
 
 @synthesize steps = _steps;
+
+
+#pragma mark Step progression
+
+
+- (KIFStepNotifications *)getNextStep
+{
+    
+}
 
 
 @end

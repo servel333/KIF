@@ -4,7 +4,7 @@
 
 #import "KIFStepProvider.h"
 
-#import "KIFMutableStepContext.h"
+#import "KIFMutableContext.h"
 #import "KIFStepNotifications.h"
 
 
@@ -14,7 +14,7 @@
 @interface KIFStepProvider ()
 
 
-//- (BOOL)performStepSelector:(SEL)selector  withContext:(KIFStepContext *)context;
+//- (BOOL)performStepSelector:(SEL)selector  withContext:(KIFContext *)context;
 
 
 @end

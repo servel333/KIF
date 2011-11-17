@@ -13,7 +13,7 @@
 #pragma mark -
 
 
-@interface KIFStepContext : NSObject {
+@interface KIFContext : NSObject {
     KIFController *_controller;
     KIFScenario *_scenario;
     NSObject<KIFStepNotifications> *_step;

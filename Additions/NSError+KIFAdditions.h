@@ -7,6 +7,14 @@
 #import "KIFTestStep.h"
 
 
+/*!
+ @const  KIFErrorDomain
+ @abstract  The error domain string used by KIF.
+ @discussion  This is used in places like [NSError initWithDomain:KIFErrorDomain ...
+ */
+extern NSString *const KIFErrorDomain;
+
+
 @interface NSError (KIFAdditions)
 
 
@@ -20,58 +28,61 @@
 
 
 /*!
- @method  kifErrorWithResult:descriptionFormat:formatArgs:
+ @method  kifErrorWithResult:description:
  @abstract  Creates and initializes an NSError object for the KIF domain with the given arguments.
- @param  result  The result to store in the errors 'code' property.
- @param  format  A format string passed directly to NSString. See “Formatting String Objects” for examples of how to use this method, and “String Format Specifiers” for a list of format specifiers. This value must not be nil.
- @param  argList  A list of arguments to substitute into format passed directly to NSString.
+ @param  description  The description of the error.
  */
-+ (NSError *)kifErrorWithResult:(KIFTestStepResult)result  descriptionFormat:(NSString *)format  formatArgs:(va_list)argList;
++ (NSError *)kifErrorWithDescription:(NSString *)description;
 
 
 /*!
- @method  kifErrorWithResult:descriptionFormat:
+ @method  kifErrorWithUnderlyingError:result:description:
  @abstract  Creates and initializes an NSError object for the KIF domain with the given arguments.
+ @param  underlyingError  The underlying error to put in the new errors user info dictionary.
  @param  result  The result to store in the errors 'code' property.
- @param  format  A format string passed directly to NSString. See “Formatting String Objects” for examples of how to use this method, and “String Format Specifiers” for a list of format specifiers. This value must not be nil.
- @param  ...  A comma-separated list of arguments to substitute into format passed directly to NSString.
+ @param  description  The description of the error.
  */
-+ (NSError *)kifErrorWithResult:(KIFTestStepResult)result  descriptionFormat:(NSString *)format, ...;
++ (NSError *)kifErrorWithUnderlyingError:(NSError *)underlyingError  result:(KIFTestStepResult)result  description:(NSString *)description;
+
+
+/*!
+ @method  kifErrorWithUnderlyingError:result:description:
+ @abstract  Creates and initializes an NSError object for the KIF domain with the given arguments.
+ @param  underlyingError  The underlying error to put in the new errors user info dictionary.
+ @param  description  The description of the error.
+ */
++ (NSError *)kifErrorWithUnderlyingError:(NSError *)underlyingError  description:(NSString *)description;
 
 
 /*!
  @method  setKifError:withResult:description:
  @abstract  Sets the given error if it points to valid memory with the given arguments.
- @param  error  The NSError object to set.
+ @param  error  The NSError pointer to set.
  @param  result  The result to store in the errors 'code' property.
  @param  description  The description of the error.
  @result  Returns a value indicating if the error was actually set.
  */
-+ (BOOL)setKifError:(NSError **)error  withResult:(KIFTestStepResult)result  description:(NSString *)description;
++ (BOOL)setKifError:(NSError **)error  result:(KIFTestStepResult)result  description:(NSString *)description;
 
 
 /*!
  @method  setKifError:withResult:description:
  @abstract  Sets the given error if it points to valid memory with the given arguments.
- @param  error  The NSError object to set.
- @param  result  The result to store in the errors 'code' property.
- @param  format  A format string passed directly to NSString. See “Formatting String Objects” for examples of how to use this method, and “String Format Specifiers” for a list of format specifiers. This value must not be nil.
- @param  argList  A list of arguments to substitute into format passed directly to NSString.
+ @param  error  The NSError pointer to set.
+ @param  description  The description of the error.
  @result  Returns a value indicating if the error was actually set.
  */
-+ (BOOL)setKifError:(NSError **)error  withResult:(KIFTestStepResult)result  descriptionFormat:(NSString *)format  formatArgs:(va_list)argList;
++ (BOOL)setKifError:(NSError **)error  description:(NSString *)description;
 
 
 /*!
- @method  setKifError:withResult:description:
+ @method  setKifError:fromStepThrewException:
  @abstract  Sets the given error if it points to valid memory with the given arguments.
- @param  error  The NSError object to set.
- @param  result  The result to store in the errors 'code' property.
- @param  format  A format string passed directly to NSString. See “Formatting String Objects” for examples of how to use this method, and “String Format Specifiers” for a list of format specifiers. This value must not be nil.
- @param  ...  A comma-separated list of arguments to substitute into format passed directly to NSString.
+ @param  error  the NSError pointer to set.
+ @param  exception  The exception object to include in this NSError as the description.
  @result  Returns a value indicating if the error was actually set.
  */
-+ (BOOL)setKifError:(NSError **)error  withResult:(KIFTestStepResult)result  descriptionFormat:(NSString *)format, ...;
++ (BOOL)setKifError:(NSError **)error  fromStepThrewException:(id)exception;
 
 
 @end

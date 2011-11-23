@@ -5,41 +5,46 @@
 #import "NSError+KIFAdditions.h"
 
 
+NSString *const KIFErrorDomain = @"KIF";
+
+
 @implementation NSError (KIFAdditions)
 
 
 + (NSError *)kifErrorWithResult:(KIFTestStepResult)result  description:(NSString *)description;
 {
     NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:description, NSLocalizedDescriptionKey, nil];
-    NSError * error = [NSError  errorWithDomain:KIF_ERROR_DOMAIN  code:result  userInfo:userInfo];
+    NSError *error = [NSError  errorWithDomain:KIFErrorDomain  code:result  userInfo:userInfo];
     
     return error;
 }
 
 
-+ (NSError *)kifErrorWithResult:(KIFTestStepResult)result  descriptionFormat:(NSString *)format  formatArgs:(va_list)argList;
++ (NSError *)kifErrorWithDescription:(NSString *)description;
 {
-    NSString * description = [[[NSString  alloc]  initWithFormat:format  arguments:argList]  autorelease];
-    
-    return [self kifErrorWithResult:result  description:description];
+    return [self  kifErrorWithResult:KIFTestStepResultFailure  description:description];
 }
 
 
-+ (NSError *)kifErrorWithResult:(KIFTestStepResult)result  descriptionFormat:(NSString *)format, ...;
++ (NSError *)kifErrorWithUnderlyingError:(NSError *)underlyingError  result:(KIFTestStepResult)result  description:(NSString *)description;
 {
-    va_list args;
-    va_start(args, format);
-    NSError *error = [self  kifErrorWithResult:result descriptionFormat:format formatArgs:args];
-    va_end(args);
+    NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:underlyingError, NSUnderlyingErrorKey, description, NSLocalizedDescriptionKey, nil];
+    NSError *error = [NSError  errorWithDomain:KIFErrorDomain  code:result  userInfo:userInfo];
     
     return error;
 }
 
 
-+ (BOOL)setKifError:(NSError **)error  withResult:(KIFTestStepResult)result  description:(NSString *)description;
++ (NSError *)kifErrorWithUnderlyingError:(NSError *)underlyingError  description:(NSString *)description;
+{
+    return [self  kifErrorWithUnderlyingError:underlyingError  result:KIFTestStepResultFailure  description:description];
+}
+
+
++ (BOOL)setKifError:(NSError **)error  result:(KIFTestStepResult)result  description:(NSString *)description;
 {
     if (error) {
-        *error = [self kifErrorWithResult:result description:description];
+        *error = [self  kifErrorWithResult:result  description:description];
         return YES;
     }
     
@@ -47,28 +52,15 @@
 }
 
 
-+ (BOOL)setKifError:(NSError **)error  withResult:(KIFTestStepResult)result  descriptionFormat:(NSString *)format  formatArgs:(va_list)argList;
++ (BOOL)setKifError:(NSError **)error  description:(NSString *)description;
 {
-    if (error) {
-        *error = [self kifErrorWithResult:result descriptionFormat:format  formatArgs:argList];
-        return YES;
-    }
-    
-    return NO;
+    return [self  setKifError:error  result:KIFTestStepResultFailure  description:description];
 }
 
 
-+ (BOOL)setKifError:(NSError **)error  withResult:(KIFTestStepResult)result  descriptionFormat:(NSString *)format, ...;
++ (BOOL)setKifError:(NSError **)error  fromStepThrewException:(id)exception;
 {
-    if (error) {
-        va_list args;
-        va_start(args, format);
-        *error = [self  kifErrorWithResult:result descriptionFormat:format formatArgs:args];
-        va_end(args);
-        return YES;
-    }
-    
-    return NO;
+    return [self  setKifError:error  result:KIFTestStepResultFailure  description:[NSString  stringWithFormat:@"Step threw exception: %@", exception]];
 }
 
 

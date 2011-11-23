@@ -271,7 +271,7 @@ static void releaseInstance()
             // If there's a timeout, then fail.
             if (currentStepDuration > self.currentStep.timeout) {
                 NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:error, NSUnderlyingErrorKey, [NSString stringWithFormat:@"The step timed out after %.2f seconds.", self.currentStep.timeout], NSLocalizedDescriptionKey, nil];
-                error = [NSError errorWithDomain:KIF_ERROR_DOMAIN code:KIFTestStepResultFailure userInfo:userInfo];
+                error = [NSError errorWithDomain:KIFErrorDomain code:KIFTestStepResultFailure userInfo:userInfo];
                 [self _advanceWithResult:KIFTestStepResultFailure error:error];
             }
             break;

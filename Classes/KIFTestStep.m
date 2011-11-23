@@ -10,6 +10,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "KIFTestStep.h"
 #import "CGGeometry-KIFAdditions.h"
+#import "NSError+KIFAdditions.h"
 #import "UIAccessibilityElement-KIFAdditions.h"
 #import "UIApplication-KIFAdditions.h"
 #import "UIScrollView-KIFAdditions.h"
@@ -297,7 +298,7 @@ static NSTimeInterval KIFTestStepDefaultTimeout = 10.0;
         
         if (![self _isUserInteractionEnabledForView:view]) {
             if (error) {
-                *error = [[[NSError alloc] initWithDomain:KIF_ERROR_DOMAIN code:KIFTestStepResultFailure userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"View with accessibility label \"%@\" is not enabled for interaction", label], NSLocalizedDescriptionKey, nil]] autorelease];
+                *error = [[[NSError alloc] initWithDomain:KIFErrorDomain code:KIFTestStepResultFailure userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"View with accessibility label \"%@\" is not enabled for interaction", label], NSLocalizedDescriptionKey, nil]] autorelease];
             }
             return KIFTestStepResultWait;
         }
@@ -360,7 +361,7 @@ static NSTimeInterval KIFTestStepDefaultTimeout = 10.0;
 
         if (![self _isUserInteractionEnabledForView:view]) {
             if (error) {
-                *error = [[[NSError alloc] initWithDomain:KIF_ERROR_DOMAIN code:KIFTestStepResultFailure userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"View with accessibility label \"%@\" is not enabled for interaction", label], NSLocalizedDescriptionKey, nil]] autorelease];
+                *error = [[[NSError alloc] initWithDomain:KIFErrorDomain code:KIFTestStepResultFailure userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"View with accessibility label \"%@\" is not enabled for interaction", label], NSLocalizedDescriptionKey, nil]] autorelease];
             }
             return KIFTestStepResultWait;
         }
@@ -696,7 +697,7 @@ static NSTimeInterval KIFTestStepDefaultTimeout = 10.0;
                 if (windows.count == 0) {
                     
                     if (error) {
-                        *error = [[[NSError alloc] initWithDomain:KIF_ERROR_DOMAIN code:KIFTestStepResultFailure userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"Failed to capture screenshot \"%@\"; no windows found.", name], NSLocalizedDescriptionKey, nil]] autorelease];
+                        *error = [[[NSError alloc] initWithDomain:KIFErrorDomain code:KIFTestStepResultFailure userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"Failed to capture screenshot \"%@\"; no windows found.", name], NSLocalizedDescriptionKey, nil]] autorelease];
                     }
                     
                     return KIFTestStepResultFailure;
@@ -744,7 +745,7 @@ static NSTimeInterval KIFTestStepDefaultTimeout = 10.0;
         
         if (![self _isUserInteractionEnabledForView:view]) {
             if (error) {
-                *error = [[[NSError alloc] initWithDomain:KIF_ERROR_DOMAIN code:KIFTestStepResultFailure userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"Album picker is not enabled for interaction"], NSLocalizedDescriptionKey, nil]] autorelease];
+                *error = [[[NSError alloc] initWithDomain:KIFErrorDomain code:KIFTestStepResultFailure userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"Album picker is not enabled for interaction"], NSLocalizedDescriptionKey, nil]] autorelease];
             }
             return KIFTestStepResultWait;
         }
@@ -1029,14 +1030,14 @@ static NSTimeInterval KIFTestStepDefaultTimeout = 10.0;
         if (error) {
             // For purposes of a better error message, see if we can find the view, just not a view with the specified value
             if (value && [[UIApplication sharedApplication] accessibilityElementWithLabel:label accessibilityValue:nil traits:traits]) {
-                *error = [[[NSError alloc] initWithDomain:KIF_ERROR_DOMAIN code:KIFTestStepResultFailure userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"Found an accessibility element with the label \"%@\", but not with the value \"%@\"", label, value], NSLocalizedDescriptionKey, nil]] autorelease];
+                *error = [[[NSError alloc] initWithDomain:KIFErrorDomain code:KIFTestStepResultFailure userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"Found an accessibility element with the label \"%@\", but not with the value \"%@\"", label, value], NSLocalizedDescriptionKey, nil]] autorelease];
             
             // Check the traits too
             } else if (traits != UIAccessibilityTraitNone && [[UIApplication sharedApplication] accessibilityElementWithLabel:label accessibilityValue:nil traits:UIAccessibilityTraitNone]) {
-                *error = [[[NSError alloc] initWithDomain:KIF_ERROR_DOMAIN code:KIFTestStepResultFailure userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"Found an accessibility element with the label \"%@\", but not with the traits \"%d\"", label, traits], NSLocalizedDescriptionKey, nil]] autorelease];
+                *error = [[[NSError alloc] initWithDomain:KIFErrorDomain code:KIFTestStepResultFailure userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"Found an accessibility element with the label \"%@\", but not with the traits \"%d\"", label, traits], NSLocalizedDescriptionKey, nil]] autorelease];
             
             } else {
-                *error = [[[NSError alloc] initWithDomain:KIF_ERROR_DOMAIN code:KIFTestStepResultFailure userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"Failed to find accessibility element with the label \"%@\"", label], NSLocalizedDescriptionKey, nil]] autorelease];
+                *error = [[[NSError alloc] initWithDomain:KIFErrorDomain code:KIFTestStepResultFailure userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"Failed to find accessibility element with the label \"%@\"", label], NSLocalizedDescriptionKey, nil]] autorelease];
             }
         }
         return nil;
@@ -1046,7 +1047,7 @@ static NSTimeInterval KIFTestStepDefaultTimeout = 10.0;
     UIView *view = [UIAccessibilityElement viewContainingAccessibilityElement:element];
     if (!view) {
         if (error) {
-            *error = [[[NSError alloc] initWithDomain:KIF_ERROR_DOMAIN code:KIFTestStepResultFailure userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat: @"Cannot find view containing accessibility element with the label \"%@\"", label], NSLocalizedDescriptionKey, nil]] autorelease];
+            *error = [[[NSError alloc] initWithDomain:KIFErrorDomain code:KIFTestStepResultFailure userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat: @"Cannot find view containing accessibility element with the label \"%@\"", label], NSLocalizedDescriptionKey, nil]] autorelease];
         }
         return nil;
     }
@@ -1070,7 +1071,7 @@ static NSTimeInterval KIFTestStepDefaultTimeout = 10.0;
 
     if ([[UIApplication sharedApplication] isIgnoringInteractionEvents]) {
         if (error) {
-            *error = [[[NSError alloc] initWithDomain:KIF_ERROR_DOMAIN code:KIFTestStepResultFailure userInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"Application is ignoring interaction events", NSLocalizedDescriptionKey, nil]] autorelease];
+            *error = [[[NSError alloc] initWithDomain:KIFErrorDomain code:KIFTestStepResultFailure userInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"Application is ignoring interaction events", NSLocalizedDescriptionKey, nil]] autorelease];
         }
         return nil;
     }
@@ -1079,7 +1080,7 @@ static NSTimeInterval KIFTestStepDefaultTimeout = 10.0;
         // Make sure the view is tappable
         if (![view isTappable]) {
             if (error) {
-                *error = [[[NSError alloc] initWithDomain:KIF_ERROR_DOMAIN code:KIFTestStepResultFailure userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"Accessibility element with label \"%@\" is not tappable. It may be blocked by other views.", label], NSLocalizedDescriptionKey, nil]] autorelease];
+                *error = [[[NSError alloc] initWithDomain:KIFErrorDomain code:KIFTestStepResultFailure userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"Accessibility element with label \"%@\" is not tappable. It may be blocked by other views.", label], NSLocalizedDescriptionKey, nil]] autorelease];
             }
             return nil;
         }
@@ -1087,7 +1088,7 @@ static NSTimeInterval KIFTestStepDefaultTimeout = 10.0;
         // If we don't require tappability, at least make sure it's not hidden
         if ([view isHidden]) {
             if (error) {
-                *error = [[[NSError alloc] initWithDomain:KIF_ERROR_DOMAIN code:KIFTestStepResultFailure userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"Accessibility element with label \"%@\" is hidden.", label], NSLocalizedDescriptionKey, nil]] autorelease];
+                *error = [[[NSError alloc] initWithDomain:KIFErrorDomain code:KIFTestStepResultFailure userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"Accessibility element with label \"%@\" is hidden.", label], NSLocalizedDescriptionKey, nil]] autorelease];
             }
             return nil;
         }

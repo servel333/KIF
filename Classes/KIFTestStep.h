@@ -10,7 +10,7 @@
 #import <UIKit/UIKit.h>
 
 
-#define  KIF_ERROR_DOMAIN  (@"KIFTest")
+extern NSString *const KIFErrorDomain;
 
 
 /*!
@@ -24,7 +24,7 @@
 #define KIFTestCondition(condition, error, ...) ({ \
 if (!(condition)) { \
     if (error) { \
-        *error = [[[NSError alloc] initWithDomain:KIF_ERROR_DOMAIN code:KIFTestStepResultFailure userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:__VA_ARGS__], NSLocalizedDescriptionKey, nil]] autorelease]; \
+        *error = [[[NSError alloc] initWithDomain:KIFErrorDomain code:KIFTestStepResultFailure userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:__VA_ARGS__], NSLocalizedDescriptionKey, nil]] autorelease]; \
     } \
     [KIFTestStep stepFailed]; \
     return KIFTestStepResultFailure; \
@@ -42,7 +42,7 @@ if (!(condition)) { \
 #define KIFTestWaitCondition(condition, error, ...) ({ \
 if (!(condition)) { \
     if (error) { \
-    *error = [[[NSError alloc] initWithDomain:KIF_ERROR_DOMAIN code:KIFTestStepResultWait userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:__VA_ARGS__], NSLocalizedDescriptionKey, nil]] autorelease]; \
+    *error = [[[NSError alloc] initWithDomain:KIFErrorDomain code:KIFTestStepResultWait userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:__VA_ARGS__], NSLocalizedDescriptionKey, nil]] autorelease]; \
     } \
     return KIFTestStepResultWait; \
 } \

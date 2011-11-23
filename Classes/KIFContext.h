@@ -3,7 +3,7 @@
 
 
 #import <Foundation/Foundation.h>
-#import "KIFStepNotifications.h"
+#import "KIFStep-Protocol.h"
 
 
 @class KIFController;
@@ -16,7 +16,7 @@
 @interface KIFContext : NSObject {
     KIFController *_controller;
     KIFScenario *_scenario;
-    NSObject<KIFStepNotifications> *_step;
+    KIFStepProtocol *_step;
     NSTimeInterval _firstRanStep;
     NSTimeInterval _lastRanStep;
     BOOL _runStepAgain;
@@ -27,7 +27,7 @@
 #pragma mark Convenience constructors
 
 
-/*!
+/**
  @abstract  Creates and returns an empty context.
  */
 + (id)context;
@@ -36,42 +36,42 @@
 #pragma mark Properties
 
 
-/*!
+/**
  @property  controller
  @abstract  The KIF controller.
  */
 @property (nonatomic, readonly) KIFController *controller;
 
 
-/*!
+/**
  @property  scenario
  @abstract  The currently executing scenario.
  */
 @property (nonatomic, readonly) KIFScenario *scenario;
 
 
-/*!
+/**
  @property  step
  @abstract  The currently executing step.
  */
-@property (nonatomic, readonly) NSObject<KIFStepNotifications> *step;
+@property (nonatomic, readonly) KIFStepProtocol *step;
 
 
-/*!
+/**
  @property  firstRanStep
  @abstract  The time interval relative to the reference date when this step was run for the first time.
  */
 @property (nonatomic, readonly) NSTimeInterval firstRanStep;
 
 
-/*!
+/**
  @property  firstRanStep
  @abstract  The time interval relative to the reference date when this step was run the most recent time.
  */
 @property (nonatomic, readonly) NSTimeInterval lastRanStep;
 
 
-/*!
+/**
  @property  runStepAgain
  @abstract  Indicates if the current step will be run again if it succeeds.
  @discussion
@@ -82,7 +82,7 @@
 @property (nonatomic) BOOL runStepAgain;
 
 
-/*!
+/**
  @property  error
  @abstract  When a step fails, this is read and used in the log message for the step failure.
  */

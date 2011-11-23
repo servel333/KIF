@@ -2,15 +2,15 @@
 //
 
 
-#import "KIFStepNotifications.h"
+#import "KIFStep-Protocol.h"
 #import "KIFTestStepExecutionBlock.h"
 #import "KIFStep.h"
 
 
-//@class KIFStep;
+@class KIFStep;
 
 
-@interface KIFStepWithExecutionBlock : KIFStep <KIFStepNotifications> {
+@interface KIFStepWithExecutionBlock : NSObject <KIFStep> {
     KIFTestStepExecutionBlock executionBlock;
 }
 

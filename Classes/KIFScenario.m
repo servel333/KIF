@@ -4,7 +4,7 @@
 
 #import "KIFScenario.h"
 
-#import "KIFStepNotifications.h"
+#import "KIFStep-Protocol.h"
 
 
 @implementation KIFScenario
@@ -30,9 +30,10 @@
 #pragma mark Step progression
 
 
-- (KIFStepNotifications *)getNextStep
+- (KIFStepProtocol *)getNextStep
 {
-    
+    // FIXME: get the next step in the sequence.
+    return nil;
 }
 
 

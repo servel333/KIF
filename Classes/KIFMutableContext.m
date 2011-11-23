@@ -49,7 +49,7 @@
 }
 
 
-- (void)setStep:(NSObject<KIFStepNotifications> *)step;
+- (void)setStep:(KIFStepProtocol *)step;
 {
     [_step release];
     _step = step;

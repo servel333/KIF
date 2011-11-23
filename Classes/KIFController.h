@@ -9,7 +9,7 @@
 #pragma mark -
 
 
-/*!
+/**
  @discussion  Next generation of the main controller.
  */
 @interface KIFController : NSObject

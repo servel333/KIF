@@ -15,14 +15,14 @@
 @class KIFTestStep;
 
 
-/*!
+/**
  @class KIFTestStep
  @abstract A step in a testing sequence.
  @discussion Steps are the most basic element of a test, and are added together to create the scenarios to be tested.
  
  Steps are the building blocks of scenarios, and should be very simple. A number of useful factory steps are provided for mimicking basic user interaction. These steps leverage the built in accessibility of iOS to find and interact with views. As such, the accessibility inspector needs to be enabled under Settings in the simulator for them to work.
  */
-@interface KIFTestStep : NSObject <KIFStepNotifications> {
+@interface KIFTestStep : NSObject <KIFStep> {
     KIFTestStepExecutionBlock executionBlock;
     NSString *description;
     NSString *notificationName;
@@ -32,35 +32,35 @@
     NSTimeInterval timeout;    
 }
 
-/*!
+/**
  @property timeout
  @abstract The amount of time to try the step before assuming that it failed.
  @discussion The timeout comes into play if a step returns the KIFTestStepResultWait result. If the step returns this result such that the step has been called repeatedly for a time greater than the timeout, then the step is considered to have failed. Steps are assumed to be well-behaved, and the timeout will not interrupt a step if it is running synchronously for an extended period of time.
  */
 @property (nonatomic) NSTimeInterval timeout;
 
-/*!
+/**
  @property description
  @abstract A description of what the step does.
  @discussion This is used to help describe what the test script is doing and where it may have failed.
  */
 @property (nonatomic, retain) NSString *description;
 
-/*!
+/**
  @method defaultTimeout
  @abstract The default amount of time to assign to new steps before assuming they failed.
  @discussion To change the default value of the timeout property, either subclass KIFTestStep and override this method or call +setDefaultTimeout: with a different value.
  */
 + (NSTimeInterval)defaultTimeout;
 
-/*!
+/**
  @method setDefaultTimeout:
  @abstract Sets the default amount of time to assign to new steps before assuming they failed.
  @discussion To change the default value of the timeout property, either subclass KIFTestStep and override +defaultTimeout or call this method with a different value.
  */
 + (void)setDefaultTimeout:(NSTimeInterval)newDefaultTimeout;
 
-/*!
+/**
  @method stepWithDescription:executionBlock:
  @abstract Convenience initializer to create a new custom step.
  @param description A description of the what the step does. Required.
@@ -68,7 +68,7 @@
  */
 + (id)stepWithDescription:(NSString *)description executionBlock:(KIFTestStepExecutionBlock)executionBlock;
 
-/*!
+/**
  @method executeAndReturnError:
  @abstract Run the execution block for the receiver.
  @discussion This method should not usually be invoked directly. The test controller will handle invoking steps as needed.
@@ -77,7 +77,7 @@
  */
 - (KIFTestStepResult)executeAndReturnError:(NSError **)error;
 
-/*!
+/**
  @method cleanUp:
  @abstract Clean up any state and listeners once the step has completed.
  @discussion For anything that needs to be removed at completion rather than dealloc
@@ -86,7 +86,7 @@
 
 #pragma mark Factory Steps
 
-/*!
+/**
  @method stepThatFails
  @abstract A step that always fails.
  @discussion Mostly useful for test debugging or as a placeholder when building new tests.
@@ -94,7 +94,7 @@
  */
 + (id)stepThatFails;
 
-/*!
+/**
  @method stepThatSucceeds
  @abstract A step that always succeeds.
  @discussion Mostly useful for test debugging or as a placeholder when building new tests.
@@ -102,7 +102,7 @@
  */
 + (id)stepThatSucceeds;
 
-/*!
+/**
  @method stepToWaitForViewWithAccessibilityLabel:
  @abstract A step that waits until a view or accessibility element is present.
  @discussion The view or accessibility element with the given label is found in the view hierarchy. If the element isn't found, then the step will attempt to wait until it is. Note that the view does not necessarily have to be visible on the screen, and may be behind another view or offscreen. Views with their hidden property set to YES are ignored.
@@ -113,7 +113,7 @@
  */
 + (id)stepToWaitForViewWithAccessibilityLabel:(NSString *)label;
 
-/*!
+/**
  @method stepToWaitForViewWithAccessibilityLabel:traits:
  @abstract A step that waits until a view or accessibility element is present.
  @discussionThe view or accessibility element with the given label is found in the view hierarchy. If the element isn't found, then the step will attempt to wait until it is. Note that the view does not necessarily have to be visible on the screen, and may be behind another view or offscreen. Views with their hidden property set to YES are ignored.
@@ -125,7 +125,7 @@
  */
 + (id)stepToWaitForViewWithAccessibilityLabel:(NSString *)label traits:(UIAccessibilityTraits)traits;
 
-/*!
+/**
  @method stepToWaitForViewWithAccessibilityLabel:value:traits:
  @abstract A step that waits until a view or accessibility element is present.
  @discussionThe view or accessibility element with the given label is found in the view hierarchy. If the element isn't found, then the step will attempt to wait until it is. Note that the view does not necessarily have to be visible on the screen, and may be behind another view or offscreen. Views with their hidden property set to YES are ignored.
@@ -138,7 +138,7 @@
  */
 + (id)stepToWaitForViewWithAccessibilityLabel:(NSString *)label value:(NSString *)value traits:(UIAccessibilityTraits)traits;
 
-/*!
+/**
  @method stepToWaitForAbsenceOfViewWithAccessibilityLabel:
  @abstract A step that waits until a view or accessibility element is no longer present.
  @discussion The view or accessibility element with the given label is found in the view hierarchy. If the element is found, then the step will attempt to wait until it isn't. Note that the view does not necessarily have to be visible on the screen, and may be behind another view or offscreen. Views with their hidden property set to YES are considered absent.
@@ -147,7 +147,7 @@
  */
 + (id)stepToWaitForAbsenceOfViewWithAccessibilityLabel:(NSString *)label;
 
-/*!
+/**
  @method stepToWaitForAbsenceOfViewWithAccessibilityLabel:traits:
  @abstract A step that waits until a view or accessibility element is no longer present.
  @discussionThe view or accessibility element with the given label is found in the view hierarchy. If the element is found, then the step will attempt to wait until it isn't. Note that the view does not necessarily have to be visible on the screen, and may be behind another view or offscreen. Views with their hidden property set to YES are considered absent.
@@ -157,7 +157,7 @@
  */
 + (id)stepToWaitForAbsenceOfViewWithAccessibilityLabel:(NSString *)label traits:(UIAccessibilityTraits)traits;
 
-/*!
+/**
  @method stepToWaitForAbsenceOfViewWithAccessibilityLabel:value:traits:
  @abstract A step that waits until a view or accessibility element is no longer present.
  @discussionThe view or accessibility element with the given label is found in the view hierarchy. If the element is found, then the step will attempt to wait until it isn't. Note that the view does not necessarily have to be visible on the screen, and may be behind another view or offscreen. Views with their hidden property set to YES are considered absent.
@@ -168,7 +168,7 @@
  */
 + (id)stepToWaitForAbsenceOfViewWithAccessibilityLabel:(NSString *)label value:(NSString *)value traits:(UIAccessibilityTraits)traits;
 
-/*!
+/**
  @method stepToWaitForTappableViewWithAccessibilityLabel:
  @abstract A step that waits until a view or accessibility element is present and available for tapping.
  @discussion The view or accessibility element with the given label is found in the view hierarchy. If the element isn't found or isn't currently tappable, then the step will attempt to wait until it is. Whether or not a view is tappable is based on -[UIView hitTest:].
@@ -177,7 +177,7 @@
  */
 + (id)stepToWaitForTappableViewWithAccessibilityLabel:(NSString *)label;
 
-/*!
+/**
  @method stepToWaitForTappableViewWithAccessibilityLabel:traits:
  @abstract A step that waits until a view or accessibility element is present and available for tapping.
  @discussion The view or accessibility element with the given label is searched for in the view hierarchy. If the element isn't found or isn't currently tappable, then the step will attempt to wait until it is. Whether or not a view is tappable is based on -[UIView hitTest:].
@@ -187,7 +187,7 @@
  */
 + (id)stepToWaitForTappableViewWithAccessibilityLabel:(NSString *)label traits:(UIAccessibilityTraits)traits;
 
-/*!
+/**
  @method stepToWaitForTappableViewWithAccessibilityLabel:value:traits:
  @abstract A step that waits until a view or accessibility element is present and available for tapping.
  @discussion The view or accessibility element with the given label is searched for in the view hierarchy. If the element isn't found or isn't currently tappable, then the step will attempt to wait until it is. Whether or not a view is tappable is based on -[UIView hitTest:].
@@ -198,7 +198,7 @@
  */
 + (id)stepToWaitForTappableViewWithAccessibilityLabel:(NSString *)label value:(NSString *)value traits:(UIAccessibilityTraits)traits;
 
-/*!
+/**
  @method stepToWaitForTimeInterval:description:
  @abstract A step that waits for a certain amount of time.
  @discussion In general when waiting for the app to get into a known state, it's better to use -stepToWaitForTappableViewWithAccessibilityLabel, however this step may be useful in some situations as well.
@@ -208,7 +208,7 @@
  */
 + (id)stepToWaitForTimeInterval:(NSTimeInterval)interval description:(NSString *)description;
 
-/*!
+/**
  @method stepToWaitForNotificationName:object:
  @abstract A step that waits for an NSNotification
  @discussion Useful when a test requires an asynchronous task to complete, especially when that task does not trigger a visible change in the view hierarchy
@@ -218,7 +218,7 @@
  */
 + (id)stepToWaitForNotificationName:(NSString*)name object:(id)object;
 
-/*!
+/**
  @abstract  A step that taps a particular view in the view hierarchy.
  @param  labelBlock  A block that will return the accessibility label of the element to tap.
  @result  A configured test step.
@@ -229,7 +229,7 @@
  */
 + (id)stepToTapViewWithAccessibilityLabelMatchingBlock:(NSString *(^)(void))labelBlock;
 
-/*!
+/**
  @abstract  A step that taps a particular view in the view hierarchy.
  @param  labelBlock  A block that will return the accessibility label of the element to tap.
  @param  traits  The accessibility traits of the element to tap. Elements that do not include at least these traits are ignored.
@@ -240,7 +240,7 @@
  */
 + (id)stepToTapViewWithAccessibilityLabelMatchingBlock:(NSString *(^)(void))labelBlock traits:(UIAccessibilityTraits)traits;
 
-/*!
+/**
  @method  stepToTapViewWithAccessibilityLabel:value:traits:
  @abstract  A step that taps a particular view in the view hierarchy.
  @param  labelBlock  A block that will return the accessibility label of the element to tap.
@@ -256,7 +256,7 @@
  */
 + (id)stepToTapViewWithAccessibilityLabelMatchingBlock:(NSString *(^)(void))labelBlock value:(NSString *)value traits:(UIAccessibilityTraits)traits;
 
-/*!
+/**
  @method stepToTapViewWithAccessibilityLabel:
  @abstract A step that taps a particular view in the view hierarchy.
  @discussion The view or accessibility element with the given label is searched for in the view hierarchy. If the element isn't found or isn't currently tappable, then the step will attempt to wait until it is. Once the view is present and tappable, a tap event is simulated in the center of the view or element.
@@ -265,7 +265,7 @@
  */
 + (id)stepToTapViewWithAccessibilityLabel:(NSString *)label;
 
-/*!
+/**
  @method stepToTapViewWithAccessibilityLabel:traits:
  @abstract A step that taps a particular view in the view hierarchy.
  @discussion The view or accessibility element with the given label is searched for in the view hierarchy. If the element isn't found or isn't currently tappable, then the step will attempt to wait until it is. Once the view is present and tappable, a tap event is simulated in the center of the view or element.
@@ -275,7 +275,7 @@
  */
 + (id)stepToTapViewWithAccessibilityLabel:(NSString *)label traits:(UIAccessibilityTraits)traits;
 
-/*!
+/**
  @method stepToTapViewWithAccessibilityLabel:value:traits:
  @abstract A step that taps a particular view in the view hierarchy.
  @discussion The view or accessibility element with the given label is searched for in the view hierarchy. If the element isn't found or isn't currently tappable, then the step will attempt to wait until it is. Once the view is present and tappable, a tap event is simulated in the center of the view or element.
@@ -288,7 +288,7 @@
  */
 + (id)stepToTapViewWithAccessibilityLabel:(NSString *)label value:(NSString *)value traits:(UIAccessibilityTraits)traits;
 
-/*!
+/**
  @method  stepToTapScreenAtPoint:description:
  @abstract  A step that taps the screen at a particular point.
  @param  screenPoint  The point in screen coordinates to tap. Screen points originate from the top left of the screen.
@@ -310,7 +310,7 @@
 + (id)stepToTapScreenAtPoint:(CGPoint)screenPoint  expectingToTap:(NSString *)name;
 */
 
-/*!
+/**
  @method stepToTapScreenAtPoint:
  @abstract A step that taps the screen at a particular point.
  @discussion Taps the screen at a specific point. In general you should use the factory steps that tap a view based on its accessibility label, but there are situations where it's not possible to access a view using accessibility mechanisms. This step is more lenient than the steps that use the accessibility label, and does not wait for any particular view to appear, or validate that the tapped view is enabled or has interaction enabled. Because this step doesn't doesn't validate that a view is present before tapping it, it's good practice to precede this step where possible with a -stepToWaitForViewWithAccessibilityLabel: with the label for another view that should appear on the same screen.
@@ -320,7 +320,7 @@
  */
 + (id)stepToTapScreenAtPoint:(CGPoint)screenPoint;
 
-/*!
+/**
  @method stepToEnterText:intoViewWithAccessibilityLabel:
  @abstract A step that enters text into a particular view in the view hierarchy.
  @discussion The view or accessibility element with the given label is searched for in the view hierarchy. If the element isn't found or isn't currently tappable, then the step will attempt to wait until it is. Once the view is present and tappable, a tap event is simulated in the center of the view or element, then text is entered into the view by simulating taps on the appropriate keyboard keys.
@@ -330,7 +330,7 @@
  */
 + (id)stepToEnterText:(NSString *)text intoViewWithAccessibilityLabel:(NSString *)label;
 
-/*!
+/**
  @method stepToEnterText:intoViewWithAccessibilityLabel:traits:
  @abstract A step that enters text into a particular view in the view hierarchy.
  @discussion The view or accessibility element with the given label is searched for in the view hierarchy. If the element isn't found or isn't currently tappable, then the step will attempt to wait until it is. Once the view is present and tappable, a tap event is simulated in the center of the view or element, then text is entered into the view by simulating taps on the appropriate keyboard keys.
@@ -342,7 +342,7 @@
  */
 + (id)stepToEnterText:(NSString *)text intoViewWithAccessibilityLabel:(NSString *)label traits:(UIAccessibilityTraits)traits expectedResult:(NSString *)expectedResult;
 
-/*!
+/**
  @method stepToSelectPickerViewRowWithTitle:
  @abstract A step that selects an item from a currently visible picker view.
  @discussion With a picker view already visible, this step will find an item with the given title, select that item, and tap the Done button.
@@ -361,7 +361,7 @@
  */
 + (id)stepToSelectPickerViewRowWithTitle:(NSString *)title inComponent:(NSUInteger)componentIndex;
 
-/*!
+/**
  @method stepToSetOn:forSwitchWithAccessibilityLabel:
  @abstract A step that toggles a UISwitch into a specified position.
  @discussion The UISwitch with the given label is searched for in the view hierarchy. If the element isn't found or isn't currently tappable, then the step will attempt to wait until it is. Once the view is present, the step will return if it's already in the desired position. If the switch is tappable but not in the desired position, a tap event is simulated in the center of the view or element, toggling the switch into the desired position.
@@ -371,7 +371,7 @@
  */
 + (id)stepToSetOn:(BOOL)switchIsOn forSwitchWithAccessibilityLabel:(NSString *)label;
 
-/*!
+/**
  @method stepToDismissPopover
  @abstract A step that dismisses a popover on screen.
  @discussion With a popover up, tap at the top-left corner of the screen.
@@ -379,14 +379,14 @@
  */
 + (id)stepToDismissPopover;
 
-/*!
+/**
  @method stepToSimulateMemoryWarning
  @abstract Simulates a memory warning.
  @result A configured test step.
  */
 + (id)stepToSimulateMemoryWarning;
 
-/*!
+/**
  @method  stepFailed
  @abstract  Called when a step fails during execution.
  @discussion
@@ -394,7 +394,7 @@
  */
 + (void)stepFailed;
 
-/*!
+/**
  @method stepsToChoosePhotoInAlbum:atRow:column:
  @abstract Select a certain photo from the built in photo picker.
  @discussion This set of steps expects that the photo picker has been initiated and that the sheet is up. From there it will tap the "Choose Photo" button and select the desired photo.
@@ -405,7 +405,7 @@
  */
 + (NSArray *)stepsToChoosePhotoInAlbum:(NSString *)albumName atRow:(NSInteger)row column:(NSInteger)column;
 
-/*!
+/**
  @method  stepsToTapString:
  @abstract  Taps an accessibility label for each character in the string.
  @param  string  The string to tap out.
@@ -415,7 +415,7 @@
 
 + (NSArray *)stepsToTapString:(NSString *)string;
 
-/*!
+/**
  @method stepToTapRowInTableViewWithAccessibilityLabel:atIndexPath:
  @abstract A step that taps the row at IndexPath in a view with the given label.
  @discussion This step will get the view with the specified accessibility label and tap the row at indexPath.
@@ -425,7 +425,7 @@
  */
 + (id)stepToTapRowInTableViewWithAccessibilityLabel:(NSString*)tableViewLabel atIndexPath:(NSIndexPath *)indexPath;
 
-/*!
+/**
  @abstract  Captures a screenshot.
  @param  name  The name of the current UI state.
  @discussion
@@ -433,7 +433,7 @@
  */
 + (id)stepToCaptureScreenshotWithName:(NSString *)name;
 
-/*!
+/**
  @abstract  Captures a screenshot.
  @param  name  The name of the current UI state.  Required.
  @param  description  The description of the step.

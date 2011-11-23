@@ -2,7 +2,7 @@
 //
 
 
-/*!
+/**
  @enum KIFTestStepResult
  @abstract Result codes from a test step.
  @constant KIFTestStepResultFailure The step failed and the test controller should move to the next scenario.

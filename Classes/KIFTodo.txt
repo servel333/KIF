@@ -1,0 +1,11 @@
+
+This file is a list of ideas and potential improvements for this project.
+
+
+@protocol KIFLog
+- (void)writeMessage:(NSString *)message;
+@end
+
+@
+
+With that, We can write one that outputs to NSLog

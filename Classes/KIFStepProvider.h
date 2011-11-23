@@ -9,7 +9,7 @@
 #pragma mark -
 
 
-/*!
+/**
  @abstract  Responsible for providing the functionality to run steps.
  */
 @interface KIFStepProvider : NSObject

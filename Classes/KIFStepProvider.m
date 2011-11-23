@@ -5,7 +5,7 @@
 #import "KIFStepProvider.h"
 
 #import "KIFMutableContext.h"
-#import "KIFStepNotifications.h"
+#import "KIFStep+Protocol.h"
 
 
 #pragma mark -

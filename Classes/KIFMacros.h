@@ -2,7 +2,17 @@
 //
 
 
-/*!
+/**
+ @define  KIF$S
+ @abstract  Shortcut for [NSString  stringWithFormat:pattern, ...]
+ @param  format  A format string. This value must not be nil.
+ @param  ...  A comma-separated list of arguments to substitute into format.
+ @discussion  See NSString for more information.
+ */
+#define  KIF$S(format, ...)  ([NSString  stringWithFormat:format, __VA_ARGS__])
+
+
+/**
  @define KIFTestCondition
  @abstract Tests a condition and returns a failure result if the condition isn't true.
  @discussion This is a useful macro for quickly evaluating conditions in a test step. If the condition is false then the current test step will be aborted with a failure result.
@@ -15,13 +25,13 @@
         if (error) { \
             *error = [[[NSError alloc] initWithDomain:@"KIFTest" code:KIFTestStepResultFailure userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:__VA_ARGS__], NSLocalizedDescriptionKey, nil]] autorelease]; \
         } \
-    [KIFTestStep stepFailed]; \
-    return KIFTestStepResultFailure; \
+        [KIFTestStep stepFailed]; \
+        return KIFTestStepResultFailure; \
     } \
 })
 
 
-/*!
+/**
  @define KIFTestWaitCondition
  @abstract Tests a condition and returns a wait result if the condition isn't true.
  @discussion This is a useful macro for quickly evaluating conditions in a test step. If the condition is false then the current test step will be aborted with a wait result, indicating that it should be called again in the near future.
@@ -34,12 +44,12 @@
         if (error) { \
             *error = [[[NSError alloc] initWithDomain:@"KIFTest" code:KIFTestStepResultWait userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:__VA_ARGS__], NSLocalizedDescriptionKey, nil]] autorelease]; \
         } \
-    return KIFTestStepResultWait; \
+        return KIFTestStepResultWait; \
     } \
 })
 
 
-/*!
+/**
  @definen  WSTestConditionBlock
  @abstract  Simplifies adding test condition steps.
  @param  condition  The condition to test.  Will be wrapped in a block and executed later.
@@ -59,7 +69,7 @@
 })
 
 
-/*!
+/**
  @definen  KIFTestWaitConditionBlock
  @abstract  Simplifies adding test condition steps.
  @param  condition  The condition to test.  Will be wrapped in a block and executed later.
@@ -77,4 +87,3 @@
         return KIFTestStepResultSuccess; \
     }; \
 })
-

@@ -12,7 +12,7 @@ typedef id         KIFUserDataValueType;
 #pragma mark -
 
 
-/*!
+/**
  @abstract  A key-value pair listing of user data associated with the scenario.
  @discussion
  This method provides the ability for the user to save and retrieve data between steps.

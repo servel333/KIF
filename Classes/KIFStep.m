@@ -14,19 +14,19 @@
 @interface KIFStep ()
 
 
-+ (BOOL)performShouldRunStepIfAvailable:(NSObject<KIFStepNotifications> *)step
++ (BOOL)performShouldRunStepIfAvailable:(KIFStepProtocol *)step
                             withContext:(KIFContext *)context;
 
 
-+ (BOOL)performStepWillBeginIfAvailable:(NSObject<KIFStepNotifications> *)step
++ (BOOL)performStepWillBeginIfAvailable:(KIFStepProtocol *)step
                             withContext:(KIFContext *)context;
 
 
-+ (BOOL)performRunStepIfAvailable:(NSObject<KIFStepNotifications> *)step
++ (BOOL)performRunStepIfAvailable:(KIFStepProtocol *)step
                       withContext:(KIFContext *)context;
 
 
-+ (void)performStepWillTerminateIfAvailable:(NSObject<KIFStepNotifications> *)step
++ (void)performStepWillTerminateIfAvailable:(KIFStepProtocol *)step
                                 withContext:(KIFContext *)context;
 
 
@@ -53,7 +53,7 @@
 #pragma mark Running the step
 
 
-+ (BOOL)runStep:(NSObject<KIFStepNotifications> *)step
++ (BOOL)runStep:(KIFStepProtocol *)step
    fromScenario:(KIFScenario *)scenario
  withController:(KIFController *)controller
 {
@@ -83,7 +83,7 @@
 }
 
 
-+ (BOOL)runStep:(NSObject<KIFStepNotifications> *)step
++ (BOOL)runStep:(KIFStepProtocol *)step
     withContext:(KIFContext *)context
 {
     BOOL success = YES;
@@ -130,7 +130,7 @@
 }
 
 
-+ (BOOL)performShouldRunStepIfAvailable:(NSObject<KIFStepNotifications> *)step
++ (BOOL)performShouldRunStepIfAvailable:(KIFStepProtocol *)step
           withContext:(KIFContext *)context
 {
     if ([step  respondsToSelector:@selector(shouldRunStep:)]) {
@@ -141,7 +141,7 @@
 }
 
 
-+ (BOOL)performStepWillBeginIfAvailable:(NSObject<KIFStepNotifications> *)step
++ (BOOL)performStepWillBeginIfAvailable:(KIFStepProtocol *)step
           withContext:(KIFContext *)context
 {
     BOOL result = YES;
@@ -153,9 +153,10 @@
         }
         @catch (id exception) {
             
-            [NSError errorWithDomain:@"KIF"  code:<#(NSInteger)#> userInfo:<#(NSDictionary *)#>
-            
-            context.error = [[[NSError alloc] initWithDomain:@"KIFTest" code:KIFTestStepResultFailure userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"Step threw exception: %@", exception], NSLocalizedDescriptionKey, nil]] autorelease];
+            NSString *errorDescription = [NSString stringWithFormat:@"Step threw exception: %@", exception];
+            NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:errorDescription, NSLocalizedDescriptionKey, nil];
+            context.error =         [NSError errorWithDomain:KIF_ERROR_DOMAIN  code:KIFTestStepResultFailure userInfo:userInfo];
+            context.error = [[[NSError alloc] initWithDomain:KIF_ERROR_DOMAIN  code:KIFTestStepResultFailure userInfo:userInfo] autorelease];
         }
         
     }
@@ -164,7 +165,7 @@
 }
 
 
-+ (BOOL)performRunStepIfAvailable:(NSObject<KIFStepNotifications> *)step
++ (BOOL)performRunStepIfAvailable:(KIFStepProtocol *)step
     withContext:(KIFContext *)context
 {
     if ([step  respondsToSelector:@selector(runStep:)]) {
@@ -175,7 +176,7 @@
 }
 
 
-+ (void)performStepWillTerminateIfAvailable:(NSObject<KIFStepNotifications> *)step
++ (void)performStepWillTerminateIfAvailable:(KIFStepProtocol *)step
               withContext:(KIFContext *)context
 {
     if ([step  respondsToSelector:@selector(stepWillTerminate:)]) {
@@ -219,7 +220,7 @@
 
 - (NSTimeInterval)stepTimeout
 {
-    return KIF_DEFAULT_TIMEOUT;
+    return KIF_DEFAULT_STEP_TIMEOUT;
 }
 
 

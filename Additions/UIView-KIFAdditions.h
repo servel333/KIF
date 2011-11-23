@@ -19,7 +19,7 @@
 - (UIAccessibilityElement *)accessibilityElementWithLabel:(NSString *)label traits:(UIAccessibilityTraits)traits;
 - (UIAccessibilityElement *)accessibilityElementWithLabel:(NSString *)label accessibilityValue:(NSString *)value traits:(UIAccessibilityTraits)traits;
 
-/*!
+/**
  @method  controllerWithClassName:forResponder:
  @abstract  Finds the named controller for the responder.
  @param  controllerClassName  The named controller to search for.
@@ -29,7 +29,7 @@
  */
 + (UIViewController *)controllerWithClassName:(NSString *)controllerClassName  forResponder:(UIResponder *)responder;
 
-/*!
+/**
  @method  controllerWithClassName:forViewWithClassName:
  @abstract  Finds the named controller of the named view.
  @param  controllerClassName  The named controller to search for.
@@ -39,7 +39,7 @@
  */
 - (UIViewController *)controllerWithClassName:(NSString *)controllerClassName  forViewWithClassName:(NSString *)viewClassName;
 
-/*!
+/**
  @method  viewWithClassName:
  @abstract  Finds the named descendent view.
  @param  className  The named class to search for.
@@ -47,7 +47,7 @@
  */
 - (UIView *)viewWithClassName:(NSString *)className;
 
-/*!
+/**
  @method accessibilityElementMatchingBlock:
  @abstract Finds the descendent accessibility element that matches the conditions defined by the match block.
  @param matchBlock A block which returns YES for matching elements.
@@ -64,7 +64,7 @@
 - (void)dragFromPoint:(CGPoint)startPoint toPoint:(CGPoint)endPoint;
 - (void)dragAlongPathWithPoints:(CGPoint *)points count:(NSInteger)count;
 
-/*!
+/**
  @method isTappableWithHitTestResultView:
  @abstract Easy hook to override whether a hit test result makes a view tappable.
  @discussion Some times, your view hierarchies involve putting overlays over views that would otherwise be tappable. Since KIF doesn't know about these exceptions, you can override this method as a convenient way of hooking in to the check for something being tappable. Your implementation will probably want to call up to super.
@@ -73,7 +73,7 @@
  */
 - (BOOL)isTappableWithHitTestResultView:(UIView *)hitView;
 
-/*!
+/**
  @method isTappableInRect:
  @abstract Whether or not the receiver can be tapped inside the given rectangular area.
  @discussion Determines whether or not tapping within the given rectangle would actually hit the receiver or one of its children. This is useful for determining if the view is actually on screen and enabled.
@@ -82,7 +82,7 @@
  */
 - (BOOL)isTappableInRect:(CGRect)rect;
 
-/*!
+/**
  @method tappablePointInRect:(CGRect)rect;
  @abstract Finds a point in the receiver that is tappable.
  @discussion Finds a tappable point in the receiver, where tappable is defined as a point that, when tapped, will hit the receiver.

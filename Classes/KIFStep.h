@@ -3,13 +3,26 @@
 
 
 #import <Foundation/Foundation.h>
+#import "KIFStepProtocol.h"
 
 
 @class KIFContext;
 @class KIFController;
 @class KIFScenario;
 @class UIView;
-@protocol KIFStepNotifications;
+
+
+#pragma mark Defines
+
+
+/**
+ @define  KIF_DEFAULT_STEP_TIMEOUT
+ @abstract  The default step timeout in seconds for a step
+ */
+#define KIF_DEFAULT_STEP_TIMEOUT  (10.0)
+
+
+extern float const KIFDefaultStepTimeout;
 
 
 #pragma mark Blocks
@@ -31,7 +44,7 @@ typedef  NSTimeInterval (^KIFGetNSTimeIntervalBlock )(void);
 #pragma mark -
 
 
-@interface KIFStep : NSObject <KIFStepNotifications> {
+@interface KIFStep : NSObject <KIFStep> {
 }
 
 
@@ -70,12 +83,12 @@ typedef  NSTimeInterval (^KIFGetNSTimeIntervalBlock )(void);
 #pragma mark runStep...
 
 
-+ (BOOL)runStep:(NSObject<KIFStepNotifications> *)step
++ (BOOL)runStep:(KIFStepProtocol *)step
    fromScenario:(KIFScenario *)scenario
  withController:(KIFController *)controller;
 
 
-+ (BOOL)runStep:(NSObject<KIFStepNotifications> *)step
++ (BOOL)runStep:(KIFStepProtocol *)step
     withContext:(KIFContext *)context;
 
 
